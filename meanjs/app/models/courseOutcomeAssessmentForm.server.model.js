@@ -4,13 +4,16 @@
 *Module Dependencies
 */
 var mongoose = require('mongoose'),
-Schema = mongoose.Schema,
-crypto = require('crypto');
+	Schema = mongoose.Schema;
 
 /**
-* Document Schema
+* CourseOutcomeAssessmentForm Schema
 */
-var DocumentSchema = new Schema({
+var CourseOutcomeAssessmentFormSchema = new Schema({
+	outcome: {
+		type: Number,
+		default: 0
+	},
 	description: {
 		type: String,
 		trim: true,
@@ -29,6 +32,9 @@ var DocumentSchema = new Schema({
 		trim: true,
 		default: ''
 	},
+	/*
+		This might need to be its own small schema and then we would nest it.
+	*/
 	instructor: {
 		type: String,
 		trim: true,
@@ -47,8 +53,11 @@ var DocumentSchema = new Schema({
 	numberOfStudents: {
 		type: Number
 	},
+	/* I think this needs to be a string. e.g. 0-10 or 0-100 */
 	gradingScale: {
-		type: Number
+		type: String,
+		trim: true,
+		default: '0-10'
 	},
 	averageScore: {
 		type: Number
@@ -68,3 +77,5 @@ var DocumentSchema = new Schema({
 		default: ''
 	}
 });
+
+mongoose.model('CourseOutcomeAssessmentForm', CourseOutcomeAssessmentFormSchema);
