@@ -26,7 +26,7 @@ describe('CourseOutcomeAssessmentForm Route Functional Tests:', function() {
 		course = new Course({
 			outcome: 3,
 			description: 'test course',
-			courseNumber: 'CEN3101',
+			courseNumber: 3101,
 			term: 'FA2014',
 			courseTitle: 'Intro to Software Engineering',
 			instructor: 'Alin Dobra',
@@ -43,7 +43,7 @@ describe('CourseOutcomeAssessmentForm Route Functional Tests:', function() {
 		course2 = new Course({
 			outcome: 1,
 			description: 'test course2',
-			courseNumber: 'COP4600',
+			courseNumber: 4600,
 			term: 'SP2014',
 			courseTitle: 'Operating Systems.',
 			instructor: 'Test Instructor',
