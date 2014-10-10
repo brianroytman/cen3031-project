@@ -7,9 +7,9 @@
 <style>
 
 html {
-
 	font-size: 20px;
 }
+
 h2 {
 	font-weight: bold;
 	font-size:  1.5em;
@@ -35,7 +35,7 @@ h4 {
 	padding-left: 200px !important;
 }
 
-#centered {
+.centered {
 	text-align: center;
 }
 
@@ -51,11 +51,11 @@ h4 {
 		<div class="grid">
 
 			<div class="grid__col grid__col--3-of-3">
-				<h2 id="centered">
+				<h2 class="centered">
 					Computer Engineering Program
 				</h2>
 				
-				<h2 id="centered">
+				<h2 class="centered">
 					Course Committee Outcomes Assessment Evaluation Form
 				</h2>
 			</div> 
@@ -63,20 +63,25 @@ h4 {
 			<br>
 			<br>
 			
-			<div class="grid__col grid__col--1-of-2">
+			<div class="grid__col grid__col--2-of-2">
 				<ul>
-					<li>Course Number and Title:</li>
-					<li>Term and Year:</li>
-					<li>Instructor:</li>
-					<li>Course Committee Participants:</li>
+					<li>Course Number and Title: {{ courseNumber }}, {{ courseTitle }}</li>
+					<li>Term and Year: {{ term }}</li>
+					<li>Instructor: {{ instructor }}</li>
+					<li>Course Committee Participants: {{ courseCommitteeParticipants }}</li>
 					<br>
-					<li>Date:</li>
+					<li>Date: {{ date }}</li>
 				</ul>
 			</div>
 
 			<div class="grid__col grid__col--1-of-2"></div>
 
 
+			<!-- 
+
+			ARE WE FILLING IN THESE CHECKBOXES DYNAMICALLY OR DOES THE COMMITTEE FILL OUT THIS FORM AND SEND IT TO THE SERVER?
+
+			-->
 
 			<div class="grid__col grid__col--2-of-3">
 				<br>
