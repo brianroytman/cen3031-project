@@ -1,3 +1,0 @@
-This folder contains the created pdfs. This file is here because I couldn't figure out how to upload an empty folder to git hub. If someone knows how to, you can remove this file and all will be well.
-
-Kyle
