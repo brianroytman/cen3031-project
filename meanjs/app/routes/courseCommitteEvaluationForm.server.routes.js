@@ -5,7 +5,7 @@
  * This file currently does not do any permissions checking. Anyone attempting
  * to use this will get all forms that have been created.
  */
-var courseOutcomeAssessment = require('../../app/controllers/courseCommitteeEvaluationForm');
+var courseCommitteeEvaluation = require('../../app/controllers/courseCommitteeEvaluationForm');
 
 module.exports = function(app) {
 	// Article Routes
