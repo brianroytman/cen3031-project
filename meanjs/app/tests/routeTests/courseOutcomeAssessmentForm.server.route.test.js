@@ -12,7 +12,7 @@ var should = require('should'),
  * Globals, id later becomes the mongodb id of a document so that it can
  * be used in id specific routes.
  */
-var course, course2, course3, id;
+var course, course2, course3, id, id2;
 
 /**
  * Functional tests.
@@ -92,6 +92,7 @@ describe('CourseOutcomeAssessmentForm Route Functional Tests:', function() {
       				res.status.should.equal(200);
       				var courseResponse = res.body;
       				Course.findOne({instructor : 'Alin Dobra'}, function (err, courses) {
+						id2 = course._id;
 						courses.term.should.equal(course.term);
 						done();
 					});
@@ -150,6 +151,15 @@ describe('CourseOutcomeAssessmentForm Route Functional Tests:', function() {
 		//This test is weird. Can't really verify the pdf is created. 
 		//Go to the /controllers/pdfs folder and verify that it has been created.
 		//Manually delete all the generated pdfs. 
+
+		it('should create a pdf form based on the first course', function(done) {
+			request
+				.get('/courseOutcomeAssessment/' + id2)
+				.end(function (err,res) {
+					res.status.should.equal(200);
+					done();
+				});
+		});
 		
 		it('should create a pdf form based on the second course', function(done) {
 			request

@@ -24,7 +24,7 @@ var courseModel1, courseModel2, courseModel3fail, id;
 
 
 describe('Course Model Unit Tests:', function(){
-	before(function(done)	{
+	beforeEach(function(done)	{
 		courseModel1 = new courseModel({
 			description: 'First string describing the class...software engineering',
 			courseNumber: 1234,
@@ -212,8 +212,41 @@ describe('Course Model Unit Tests:', function(){
 				done();
 			});
 		});
+	});
 
+	describe('Multiple CourseOutcomeAssessmentForms', function() {
+		it('should be able to save 2 different outcomes', function(done) {
+			courseModel1.save(function(err){
+				should.not.exist(err);
+				courseModel2.save(function(err2) {
+					should.not.exist(err2);
+					done();
+				});
+			});
+		});
 
+		it('should be able to find the 2 saved outcomeForms', function(done) {
+			courseModel.find({}, function(err,courses) {
+				courses.should.have.length(2);
+				should.not.exist(err);
+				done();
+			});
+		});
+
+		it('should be able to delete the 2 saved outcomeForms', function(done) {
+			courseModel.find({}, function(err,courses) {
+				courses.should.have.length(2);
+				should.not.exist(err);
+				courses[0].remove(function(err) {
+					should.not.exist(err);
+					courses[1].remove(function(err) {
+						should.not.exist(err);
+						done();
+					});
+				});
+				
+			});
+		});
 	});
 
 	after(function(done){
