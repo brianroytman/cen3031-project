@@ -45,6 +45,7 @@
 	},
 	"devDependencies": {
 		"supertest": "~0.13.0",
+		"node-mocks-http": "~1.2.0",
 		"sinon": "~1.10.3",
 		"should": "~4.0.4",
 		"grunt-env": "~0.4.1",

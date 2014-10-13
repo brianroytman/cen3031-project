@@ -12,7 +12,7 @@ var should = require('should'),
  * Globals, id later becomes the mongodb id of a document so that it can
  * be used in id specific routes.
  */
-var course, course2, id;
+var course, course2, course3, id;
 
 /**
  * Functional tests.
@@ -42,6 +42,23 @@ describe('CourseOutcomeAssessmentForm Route Functional Tests:', function() {
 		});
 		course2 = new Course({
 			outcome: 1,
+			description: 'test course2',
+			courseNumber: 4600,
+			term: 'SP2014',
+			courseTitle: 'Operating Systems.',
+			instructor: 'Test Instructor',
+			date: new Date(),
+			descriptionOfInstrument: 'this is test data.',
+			numberOfStudents: 600,
+			gradingScale: '0-10',
+			averageScore: 55,
+			scoreForAdequateOutcomeAchievement: 70,
+			percentOfStudentsAchievingOutcomeAdequately: 10,
+			averageLikertScaleValue: 1.5,
+			instructorComments: 'this is test data comments.'
+		});
+
+		course3 = new Course({
 			description: 'test course2',
 			courseNumber: 4600,
 			term: 'SP2014',
@@ -96,6 +113,20 @@ describe('CourseOutcomeAssessmentForm Route Functional Tests:', function() {
 				
 				});
       	});
+/*
+		it('should fail to save a form without an outcome', function(done) {
+			course2.term = ''
+			request
+				.post('/courseOutcomeAssessment')
+				.send(course2)
+      			.end(function (err,res) {
+      				res.status.should.equal(400);
+      				should.exist(err);
+      				done();
+				
+				});
+      	});
+*/
 
 		it('should return both of the newly created CourseOutcomeAssessmentForms', function(done) {
 			request
@@ -104,10 +135,10 @@ describe('CourseOutcomeAssessmentForm Route Functional Tests:', function() {
       				res.status.should.equal(200);
       				var courseResponse = res.body;
       				courseResponse.length.should.equal(2);
-      				courseResponse[0].courseTitle.should.equal(course.courseTitle);
-      				courseResponse[0].term.should.equal(course.term);
-      				courseResponse[1].courseTitle.should.equal(course2.courseTitle);
-      				courseResponse[1].term.should.equal(course2.term);
+      				courseResponse[1].courseTitle.should.equal(course.courseTitle);
+      				courseResponse[1].term.should.equal(course.term);
+      				courseResponse[0].courseTitle.should.equal(course2.courseTitle);
+      				courseResponse[0].term.should.equal(course2.term);
       				done();
       			});
 		});
@@ -119,6 +150,7 @@ describe('CourseOutcomeAssessmentForm Route Functional Tests:', function() {
 		//This test is weird. Can't really verify the pdf is created. 
 		//Go to the /controllers/pdfs folder and verify that it has been created.
 		//Manually delete all the generated pdfs. 
+		
 		it('should create a pdf form based on the second course', function(done) {
 			request
 				.get('/courseOutcomeAssessment/' + id)
@@ -127,6 +159,7 @@ describe('CourseOutcomeAssessmentForm Route Functional Tests:', function() {
 					done();
 				});
 		});
+
 		//This test will need to be updated if we fix thte sorting of the get operation
 		it('should successfully update a form', function(done) {
 			course2.description = 'I am newly updated.';
@@ -140,7 +173,7 @@ describe('CourseOutcomeAssessmentForm Route Functional Tests:', function() {
 						.end(function(err2,res2) {
 							var body = res2.body;
 							body.length.should.equal(2);
-							body[1].description.should.equal('I am newly updated.');
+							body[0].description.should.equal('I am newly updated.');
 							done();
 						});
 				});

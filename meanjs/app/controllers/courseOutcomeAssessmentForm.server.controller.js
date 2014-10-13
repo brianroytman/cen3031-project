@@ -14,18 +14,19 @@ var mongoose = require('mongoose'),
 /**
  * Store the JSON objects for the CourseOutcomeAssessmentForm
  */
-exports.create = function(req, res) {
+exports.create = function(req, res, next) {
 	var course = new Course(req.body);
 	course.save(function(err) {
 		if (err) {
-			console.log('Im throwing an error' + err);
-			return res.status(400).send({
+			res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(course);
+			res.status(200).json(course);
 		}
+		next();
 	});
+	
 };
 
 /**
@@ -44,7 +45,9 @@ var generatePDF = function (html,id,req,res) {
       			ph.exit();
 				res.download(path, 'report.pdf', function(err) {
 					if(err) {
-						console.log('Err' + err);
+						res.status(400).send({
+							message: errorHandler.getErrorMessage(err)
+						});
 					}
 				});
       		});  	
@@ -55,12 +58,18 @@ var generatePDF = function (html,id,req,res) {
 
 /**
  * Uses Handlebarsjs to dynamically populate a html template with a json object.
+ * TODO fix this so the date appears without the time in it.
  */ 
-var generateHTML = function(course,filename,req,res) {
+var generateHTML = function(course,filename,req,res,next) {
 	fs.readFile(filename, function(err,data) {
 		var template = Handlebars.compile(data.toString());
 		var result = template(course);
-		generatePDF(result,course._id,req,res);
+		//generate the pdf
+		if(next) {
+			next();
+		} else {
+			generatePDF(result, course._id,req,res);
+		}
 	});
 };
 
@@ -69,7 +78,8 @@ var generateHTML = function(course,filename,req,res) {
  */
 exports.read = function(req, res) {
 	var filename = __dirname + '/pdfModels/CourseOutcomeAssessmentForm.html';
-	generateHTML(req.course,filename,req,res);
+	var temp = req.course;
+	generateHTML(temp,filename,req,res);
 };
 
 
@@ -77,63 +87,60 @@ exports.read = function(req, res) {
 /**
  * Update a courseOutcomeAssessmentForm
  */
-exports.update = function(req, res) {
+exports.update = function(req, res, next) {
 	var course = req.course;
-
 	course = _.extend(course, req.body);
-
 	course.save(function(err) {
 		if (err) {
-			return res.status(400).send({
+			res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(course);
+			res.json(course);
 		}
+		next();
 	});
 };
 
 /**
  * Delete a courseOutcomeAssessmentForm
  */
-exports.delete = function(req, res) {
+exports.delete = function(req, res, next) {
 	var course = req.course;
-
 	course.remove(function(err) {
 		if (err) {
-			return res.status(400).send({
+			res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(course);
+			res.json(course);
 		}
+		next();
 	});
 };
 
 /**
  * List of courseOutcomeAssessmentForms
  */
-exports.list = function(req, res) {
-	//TODO fix this sort. Should sort by date not instructor. Set as instructor
-	//because I was running into errors in my tests where Date would be the same
-	//so I couldn't reasonably predict the behavior of the response.
-	Course.find().sort('instructor').exec(function(err, courses) {
+exports.list = function(req, res, next) {
+	Course.find().sort({date: -1, courseNumber: -1}).exec(function(err, courses) {
 		if (err) {
-			return res.status(400).send({
+			res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(courses);
+			res.json(courses);
 		}
+		next();
 	});
 
 };
 
 /**
- * CourseOutcomeAssessmentForm middleware used to 
+ * CourseOutcomeAssessmentForm middleware 
  */
 exports.courseOutcomeAssessmentByID = function(req, res, next, id) {
-	Course.findById(id).populate('user', 'displayName').exec(function(err, course) {
+	Course.findById(id).exec(function(err, course) {
 		if (err) return next(err);
 		if (!course) return next(new Error('Failed to load course ' + id));
 		req.course = course;
