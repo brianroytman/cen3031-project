@@ -5,7 +5,7 @@
  */
 var mongoose = require('mongoose'),
 	errorHandler = require('./errors'),
-	Course = mongoose.model('CourseCommitteeEvaluationForm'),
+	CourseCommittee = mongoose.model('CourseCommitteeEvaluationForm'),
 	Handlebars = require('handlebars'),
 	phantom = require('phantom'),
 	fs = require('fs'),
@@ -14,19 +14,22 @@ var mongoose = require('mongoose'),
 /**
  * Store the JSON objects for the CourseCommitteeEvaluationForm
  */
-exports.create = function(req, res) {
-	var course = new Course(req.body);
-	course.save(function(err) {
+exports.create = function(req, res, next) {
+	// console.log('body: '+require('util').inspect(req.body));
+	var courseCommittee = new CourseCommittee(req.body);
+	courseCommittee.save(function(err) {
 		if (err) {
-			console.log('Im throwing an error' + err);
-			return res.status(400).send({
+			res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(course);
+			res.status(200).json(courseCommittee);
 		}
+		next();
 	});
+	
 };
+
 
 /**
  * Uses phantomjs to render the provided html into a pdf.
@@ -56,11 +59,11 @@ var generatePDF = function (html,id,req,res) {
 /**
  * Uses Handlebarsjs to dynamically populate a html template with a json object.
  */ 
-var generateHTML = function(course,filename,req,res) {
+var generateHTML = function(courseComittee,filename,req,res) {
 	fs.readFile(filename, function(err,data) {
 		var template = Handlebars.compile(data.toString());
-		var result = template(course);
-		generatePDF(result,course._id,req,res);
+		var result = template(courseComittee);
+		generatePDF(result,courseComittee._id,req,res);
 	});
 };
 
@@ -69,7 +72,7 @@ var generateHTML = function(course,filename,req,res) {
  */
 exports.read = function(req, res) {
 	var filename = __dirname + '/pdfModels/CourseCommitteeEvaluationForm.html';
-	generateHTML(req.course,filename,req,res);
+	generateHTML(req.courseComittee,filename,req,res);
 };
 
 
@@ -78,17 +81,17 @@ exports.read = function(req, res) {
  * Update a courseCommitteeEvaluationForm
  */
 exports.update = function(req, res) {
-	var course = req.course;
+	var courseComittee = req.courseComittee;
 
-	course = _.extend(course, req.body);
+	courseComittee = _.extend(courseComittee, req.body);
 
-	course.save(function(err) {
+	courseComittee.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(course);
+			res.json(courseComittee);
 		}
 	});
 };
@@ -97,15 +100,15 @@ exports.update = function(req, res) {
  * Delete a courseCommitteeEvaluationForm
  */
 exports.delete = function(req, res) {
-	var course = req.course;
+	var courseComittee = req.courseComittee;
 
-	course.remove(function(err) {
+	courseComittee.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(course);
+			res.json(courseComittee);
 		}
 	});
 };
@@ -117,13 +120,13 @@ exports.list = function(req, res) {
 	//TODO fix this sort. Should sort by date not instructor. Set as instructor
 	//because I was running into errors in my tests where Date would be the same
 	//so I couldn't reasonably predict the behavior of the response.
-	Course.find().sort('instructor').exec(function(err, courses) {
+	CourseCommittee.find().sort('courseCommitteeParticipants').exec(function(err, courses) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.jsonp(courses);
+			res.json(courses);
 		}
 	});
 
@@ -133,10 +136,10 @@ exports.list = function(req, res) {
  * CourseCommitteeEvaluationForm middleware used to 
  */
 exports.courseCommitteeEvaluationByID = function(req, res, next, id) {
-	Course.findById(id).populate('user', 'displayName').exec(function(err, course) {
+	CourseCommittee.findById(id).populate('user', 'displayName').exec(function(err, courseComittee) {
 		if (err) return next(err);
-		if (!course) return next(new Error('Failed to load course ' + id));
-		req.course = course;
+		if (!courseComittee) return next(new Error('Failed to load course committee ' + id));
+		req.courseComittee = courseComittee;
 		next();
 	});
 };
@@ -145,7 +148,7 @@ exports.courseCommitteeEvaluationByID = function(req, res, next, id) {
  * Not currently used, but will most likely need later.
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.course.user.id !== req.user.id) {
+	if (req.courseComittee.user.id !== req.user.id) {
 		return res.status(403).send({
 			message: 'User is not authorized'
 		});

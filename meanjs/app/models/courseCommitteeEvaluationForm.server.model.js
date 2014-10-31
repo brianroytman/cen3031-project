@@ -10,32 +10,6 @@ var mongoose = require('mongoose'),
 * CourseCommitteeEvaluationForm Schema
 */
 var CourseCommitteeEvaluationFormSchema = new Schema({
-	/* Found in outcomeAssessmentFormSchema
-	courseTitle: {
-		type: String,
-		trim: true,
-		default: '',
-		required: true
-	},
-	courseNumber: {
-		type: Number,
-		required: true
-	},
-	term: {
-		type: String,
-		trim: true,
-		default: '',
-		required: true
-	},
-	/*
-		This might need to be its own small schema and then we would nest it.
-	*/ /* Found in outcome assessment form schema
-	instructor: {
-		type: String,
-		trim: true,
-		default: '',
-		required: true
-	},
 	/*
 		For now I'll just have this as a string, but eventually might need 
 		to be a list of users or instructors or something.
