@@ -74,8 +74,6 @@ describe('CourseCommitteeEvaluationForm Contoller Unit Tests:', function() {
 
 			});
 
-			// console.log('util.inspect: '+util.inspect(courseEvaluation));
-
 			req = httpMocks.createRequest({
 				method: 'POST',
 				url: '/courseCommitteeEvaluation',
@@ -102,12 +100,14 @@ describe('CourseCommitteeEvaluationForm Contoller Unit Tests:', function() {
 		it('should create a new CourseCommitteeEvaluationForm', function(done) {
 			controller.create(req,res, function() {
 				var code = JSON.parse(res._getStatusCode());
-				// console.log('res.getData(): ' +util.inspect(res._getData()));
 				var data = JSON.parse(res._getData());
-
-				data.courseOutcomeAssessmentForm.courseNumber.should.equal(courseEvaluation.courseOutcomeAssessmentForm.courseNumber);
-				code.should.equal(200);
-				done();
+				var object;
+				CourseModel.findById(courseEvaluation.courseOutcomeAssessmentForm).exec(function(err, course) {
+					object = course;
+					object.courseNumber.should.equal(courseModel1.courseNumber);
+					code.should.equal(200);
+					done();
+				});
 			});
 		});
 

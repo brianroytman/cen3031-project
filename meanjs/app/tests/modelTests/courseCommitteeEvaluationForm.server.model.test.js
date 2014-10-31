@@ -8,8 +8,8 @@
 
 var should = require('should'),
 	mongoose = require('mongoose'),
-	courseModel= mongoose.model('CourseOutcomeAssessmentForm'),
-	courseComittee = mongoose.model('CourseCommitteeEvaluationForm');
+	CourseModel= mongoose.model('CourseOutcomeAssessmentForm'),
+	CourseCommittee = mongoose.model('CourseCommitteeEvaluationForm');
 
 
 
@@ -17,7 +17,7 @@ var should = require('should'),
 * Globals
 */
 
-var courseModel1, courseModel2, courseEvaluation, id;
+var courseModel1, courseEvaluation, id;
 
 /**
 * Unit tests
@@ -26,7 +26,7 @@ var courseModel1, courseModel2, courseEvaluation, id;
 
 describe('Course Committee Evaluation Unit Tests:', function(){
 	beforeEach(function(done)	{
-		courseModel1 = new courseModel({
+		courseModel1 = new CourseModel({
 			description: 'First string describing the class...software engineering',
 			courseNumber: 1234,
 			term: 'Fall 2014',
@@ -44,7 +44,7 @@ describe('Course Committee Evaluation Unit Tests:', function(){
 		});
 
 		courseModel1.save(function() {
-			courseEvaluation = new courseComittee({
+			courseEvaluation = new CourseCommittee({
 				courseCommitteeParticipants: 'Kyle Adam Zach Brian Brett',
 				description: 'This is a test',
 				syllabusReflectCurrentContent: false,
@@ -66,9 +66,10 @@ describe('Course Committee Evaluation Unit Tests:', function(){
 				sectionIIIRecommendationsComments: 'This is test for section III',
 				courseOutcomeAssessmentForm: courseModel1
 			});
+			done();
 		});
 
-		done();
+		
 	});	
 
 	describe('Method Save', function() {
@@ -237,7 +238,7 @@ describe('Course Committee Evaluation Unit Tests:', function(){
 		it('should be able to return the outcome from the nested schema', function(done) {
 			courseEvaluation.save(function(err) {
 				should.not.exist(err);
-				courseComittee.find({})
+				CourseCommittee.find({})
 					.populate('courseOutcomeAssessmentForm')
 					.exec( function(err,courses) {
 						var util = require('util');
@@ -253,8 +254,8 @@ describe('Course Committee Evaluation Unit Tests:', function(){
 	});
 
 	afterEach(function(done) {
-		courseComittee.remove().exec();
-		courseModel.remove().exec();
+		CourseCommittee.remove().exec();
+		CourseModel.remove().exec();
 		done();
 	});
 });

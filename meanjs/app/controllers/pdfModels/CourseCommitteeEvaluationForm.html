@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+<style>
+.grid{list-style:none;margin-left:-20px}.grid>.grid__col--2-of-2,.grid>.grid__col--3-of-3,.grid>.grid__col--4-of-4,.grid>.grid__col--5-of-5,.grid>.grid__col--6-of-6,.grid>.grid__col--8-of-8,.grid>.grid__col--12-of-12{width:100%}.grid>.grid__col--1-of-2,.grid>.grid__col--2-of-4,.grid>.grid__col--3-of-6,.grid>.grid__col--4-of-8,.grid>.grid__col--6-of-12{width:50%}.grid>.grid__col--1-of-3,.grid>.grid__col--2-of-6,.grid>.grid__col--4-of-12{width:33.33333%}.grid>.grid__col--2-of-3,.grid>.grid__col--4-of-6,.grid>.grid__col--8-of-12{width:66.66667%}.grid>.grid__col--1-of-4,.grid>.grid__col--2-of-8,.grid>.grid__col--3-of-12{width:25%}.grid>.grid__col--3-of-4,.grid>.grid__col--6-of-8,.grid>.grid__col--9-of-12{width:75%}.grid>.grid__col--push-2-of-2,.grid>.grid__col--push-3-of-3,.grid>.grid__col--push-4-of-4,.grid>.grid__col--push-5-of-5,.grid>.grid__col--push-6-of-6,.grid>.grid__col--push-8-of-8,.grid>.grid__col--push-12-of-12{margin-left:100%}.grid>.grid__col--push-1-of-2,.grid>.grid__col--push-2-of-4,.grid>.grid__col--push-3-of-6,.grid>.grid__col--push-4-of-8,.grid>.grid__col--push-6-of-12{margin-left:50%}.grid>.grid__col--push-1-of-3,.grid>.grid__col--push-2-of-6,.grid>.grid__col--push-4-of-12{margin-left:33.33333%}.grid>.grid__col--push-2-of-3,.grid>.grid__col--push-4-of-6,.grid>.grid__col--push-8-of-12{margin-left:66.66667%}.grid>.grid__col--push-1-of-4,.grid>.grid__col--push-2-of-8,.grid>.grid__col--push-3-of-12{margin-left:25%}.grid>.grid__col--push-3-of-4,.grid>.grid__col--push-6-of-8,.grid>.grid__col--push-9-of-12{margin-left:75%}.grid>.grid__col--pull-2-of-2,.grid>.grid__col--pull-3-of-3,.grid>.grid__col--pull-4-of-4,.grid>.grid__col--pull-5-of-5,.grid>.grid__col--pull-6-of-6,.grid>.grid__col--pull-8-of-8,.grid>.grid__col--pull-12-of-12{margin-left:-100%}.grid>.grid__col--pull-1-of-2,.grid>.grid__col--pull-2-of-4,.grid>.grid__col--pull-3-of-6,.grid>.grid__col--pull-4-of-8,.grid>.grid__col--pull-6-of-12{margin-left:-50%}.grid>.grid__col--pull-1-of-3,.grid>.grid__col--pull-2-of-6,.grid>.grid__col--pull-4-of-12{margin-left:-33.33333%}.grid>.grid__col--pull-2-of-3,.grid>.grid__col--pull-4-of-6,.grid>.grid__col--pull-8-of-12{margin-left:-66.66667%}.grid>.grid__col--pull-1-of-4,.grid>.grid__col--pull-2-of-8,.grid>.grid__col--pull-3-of-12{margin-left:-25%}.grid>.grid__col--pull-3-of-4,.grid>.grid__col--pull-6-of-8,.grid>.grid__col--pull-9-of-12{margin-left:-75%}.grid>.grid__col--1-of-5{width:20%}.grid>.grid__col--push-1-of-5{margin-left:20%}.grid>.grid__col--pull-1-of-5{margin-left:-20%}.grid>.grid__col--2-of-5{width:40%}.grid>.grid__col--push-2-of-5{margin-left:40%}.grid>.grid__col--pull-2-of-5{margin-left:-40%}.grid>.grid__col--3-of-5{width:60%}.grid>.grid__col--push-3-of-5{margin-left:60%}.grid>.grid__col--pull-3-of-5{margin-left:-60%}.grid>.grid__col--4-of-5{width:80%}.grid>.grid__col--push-4-of-5{margin-left:80%}.grid>.grid__col--pull-4-of-5{margin-left:-80%}.grid>.grid__col--1-of-6{width:16.66667%}.grid>.grid__col--push-1-of-6{margin-left:16.66667%}.grid>.grid__col--pull-1-of-6{margin-left:-16.66667%}.grid>.grid__col--5-of-6{width:83.33333%}.grid>.grid__col--push-5-of-6{margin-left:83.33333%}.grid>.grid__col--pull-5-of-6{margin-left:-83.33333%}.grid>.grid__col--1-of-8{width:12.5%}.grid>.grid__col--push-1-of-8{margin-left:12.5%}.grid>.grid__col--pull-1-of-8{margin-left:-12.5%}.grid>.grid__col--3-of-8{width:37.5%}.grid>.grid__col--push-3-of-8{margin-left:37.5%}.grid>.grid__col--pull-3-of-8{margin-left:-37.5%}.grid>.grid__col--5-of-8{width:62.5%}.grid>.grid__col--push-5-of-8{margin-left:62.5%}.grid>.grid__col--pull-5-of-8{margin-left:-62.5%}.grid>.grid__col--7-of-8{width:87.5%}.grid>.grid__col--push-7-of-8{margin-left:87.5%}.grid>.grid__col--pull-7-of-8{margin-left:-87.5%}.grid>.grid__col--1-of-12{width:8.33333%}.grid>.grid__col--push-1-of-12{margin-left:8.33333%}.grid>.grid__col--pull-1-of-12{margin-left:-8.33333%}.grid>.grid__col--2-of-12{width:16.66667%}.grid>.grid__col--push-2-of-12{margin-left:16.66667%}.grid>.grid__col--pull-2-of-12{margin-left:-16.66667%}.grid>.grid__col--5-of-12{width:41.66667%}.grid>.grid__col--push-5-of-12{margin-left:41.66667%}.grid>.grid__col--pull-5-of-12{margin-left:-41.66667%}.grid>.grid__col--7-of-12{width:58.33333%}.grid>.grid__col--push-7-of-12{margin-left:58.33333%}.grid>.grid__col--pull-7-of-12{margin-left:-58.33333%}.grid>.grid__col--10-of-12{width:83.33333%}.grid>.grid__col--push-10-of-12{margin-left:83.33333%}.grid>.grid__col--pull-10-of-12{margin-left:-83.33333%}.grid>.grid__col--11-of-12{width:91.66667%}.grid>.grid__col--push-11-of-12{margin-left:91.66667%}.grid>.grid__col--pull-11-of-12{margin-left:-91.66667%}.grid .grid__col{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;margin-right:-.25em;min-height:1px;padding-left:20px;vertical-align:top}@media (max-width: 700px){.grid .grid__col{display:block;margin-left:0;margin-right:0;width:auto}}@media (max-width: 700px) and (min-width: 480px){.grid .grid__col[class*="grid__col--m-"]{display:inline-block;margin-right:-.24em}.grid .grid__col.grid__col--m-1-of-2,.grid .grid__col.grid__col--m-2-of-4{width:50%}.grid .grid__col.grid__col--m-1-of-3{width:33.33333%}.grid .grid__col.grid__col--m-1-of-3{width:66.66667%}.grid .grid__col.grid__col--m-1-of-4{width:25%}.grid .grid__col.grid__col--m-3-of-4{width:75%}}@media (max-width: 480px){.grid .grid__col[class*="grid__col--s-"]{display:inline-block;margin-right:-.24em}.grid .grid__col.grid__col--s-1-of-2,.grid .grid__col.grid__col--s-2-of-4{width:50%}.grid .grid__col.grid__col--s-1-of-3{width:33.33333%}.grid .grid__col.grid__col--s-1-of-3{width:66.66667%}.grid .grid__col.grid__col--s-1-of-4{width:25%}.grid .grid__col.grid__col--s-3-of-4{width:75%}}.grid .grid__col--centered{display:block;margin-left:auto;margin-right:auto}.grid .grid__col--d-first{float:left}.grid .grid__col--d-last{float:right}.grid.grid--no-gutter{margin-left:0;width:100%}.grid.grid--no-gutter>*{padding-left:0}.grid.grid--no-gutter .grid__col--span-all{margin-left:0;width:100%}.grid .grid__col--ab{vertical-align:bottom}.grid .grid__col--am{vertical-align:middle}
+
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-size: 100%;
+	font: inherit;
+	vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+	display: block;
+}
+body {
+	line-height: 1;
+}
+ol, ul {
+	list-style: none;
+}
+blockquote, q {
+	quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+	content: '';
+	content: none;
+}
+table {
+	border-collapse: collapse;
+	border-spacing: 0;
+}
+
+html {
+	font-size: 20px;
+}
+
+h2 {
+	font-weight: bold;
+	font-size:  1.5em;
+}
+
+h3 {
+	font-weight: bold;
+	font-size:  1.2em;
+}
+
+h4 {
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
+.container {
+	padding-top: 100px;
+	margin: 0 auto;
+	width: 80%;
+}
+
+.align-right {
+	padding-left: 200px !important;
+}
+
+.centered {
+	text-align: center;
+}
+
+.space
+{
+	padding: 20px 10px 20px 10px;
+}
+
+.inline
+{
+	padding-left: 3em;
+	padding-top: 2px;
+	padding-bottom: 2px;
+}
+
+#outcome
+{ 
+	margin: 0 auto;
+}
+
+th
+{
+	padding: 10px 25px 10px 10px;
+	text-align: center;
+
+}
+td
+{
+	border: 1px solid gray;
+	padding: 10px 25px 10px 10px;
+	text-align: center;
+}
+
+.bold
+{
+	font-weight: bold;
+}
+
+
+
+</style>
+
+
+</head>
+
+<body>
+	<div class="container">
+	
+		<div class="grid">
+
+			<div class="grid__col grid__col--3-of-3">
+				<h2 class="centered">
+					Computer Engineering Program
+				</h2>
+				
+				<h2 class="centered">
+					Course Committee Outcomes Assessment Evaluation Form
+				</h2>
+			</div> 
+
+			<br>
+			<br>
+			
+			<div class="grid__col grid__col--2-of-2">
+				<ul>
+					<li>Course Number and Title: {{ courseNumber }}, {{ courseTitle }}</li>
+					<li>Term and Year: {{ term }}</li>
+					<li>Instructor: {{ instructor }}</li>
+					<li>Course Committee Participants: {{ courseCommitteeParticipants }}</li>
+					<br>
+					<li>Date: {{ date }}</li>
+				</ul>
+			</div>
+
+			<div class="grid__col grid__col--1-of-2"></div>
+
+			<div class="grid__col grid__col--2-of-3">
+				<br>
+				<h3>I. Course Issues:</h3>
+				<br>
+
+				<ul>
+					<li>Syllabus: Does the syllabus reflect current content?</li>
+					<li>Are there topics that should be dropped from the course?</li>
+					<li>Are there topics that should be added to the course?</li>
+					
+					<br>
+
+					<li>Textbook: Is the textbook working well?</li>
+					<li>Should changes be considered for the next academic year?</li>
+					<li>Are there new books available that should be evaluated?</li>
+					<li>Does the book map well onto the syllabus?</li>
+
+					<br>
+
+					<li>Do other assessments (performance/exit surveys,student feedback) indicate issues that need to be addressed?</li>
+
+					<br>
+
+					<li>Student Performance: Did students master the material?</li>
+					<li>Are there problems in the their knowledge of key concepts?</li>
+				</ul>
+			</div>
+
+			<div class="grid__col grid__col--1-of-3 ">
+				<br>
+				<br>
+				<br>
+
+				<input type="checkbox" {{#if syllabusReflectCurrentContent}}checked{{/if}}>
+				<input type="checkbox" 
+					{{#if syllabusReflectCurrentContent}} {{/if}}>
+					<label>NO</label>
+				
+				<br>
+				<input type="checkbox"
+					{{#if droppedTopics}}checked{{/if}}>
+					<label>YES</label>
+				<input type="checkbox"
+					{{#if droppedTopics}}{{/if}}>
+					<label>NO</label>
+				
+				<br>
+
+				<input type="checkbox"
+					{{#if addedTopics}}checked{{/if}}>
+					<label>YES</label>
+				<input type="checkbox"
+					{{#if addedTopics}}{{/if}}>
+					<label>NO</label>
+
+				<br>
+				<br>
+
+				<input type="checkbox"
+					{{#if textbookWorkingWell}}checked{{/if}}>
+					<label>YES</label>
+				<input type="checkbox"
+					{{#if textbookWorkingWell}}{{/if}}>
+					<label>NO</label>
+				<br>
+				<input type="checkbox"
+					{{#if changesRequiredForNextAcademicYear}}checked{{/if}}>
+					<label>YES</label>
+				<input type="checkbox"
+					{{#if changesRequiredForNextAcademicYear}}{{/if}}>
+					<label>NO</label>
+				<br>
+				<input type="checkbox"><label>YES</label>
+				<input type="checkbox"><label>NO</label>
+				<br>
+				<input type="checkbox"><label>YES</label>
+				<input type="checkbox"><label>NO</label>
+
+				<br>
+				<br>
+
+				<br>
+				<input type="checkbox"><label>YES</label>
+				<input type="checkbox"><label>NO</label>
+
+				<br>
+				<br>
+
+				<input type="checkbox"><label>YES</label>
+				<input type="checkbox"><label>NO</label>
+				<br>
+				<input type="checkbox"><label>YES</label>
+				<input type="checkbox"><label>NO</label>
+			</div>
+
+			<br>
+			<br>
+
+			<div class="grid__col grid__col--2-of-2">
+				<h4>ACTIONS/RECOMMENDATIONS:</h4>
+				<textarea name="" id="" cols="95" rows="10"></textarea>
+			</div>
+			
+		
+
+			<div class="grid__col grid__col--2-of-3">
+				<br>
+				<h3>II. Program Issues:</h3>
+				<br>
+				<ul>
+					<li>Are the pre-requisites still appropriate for this course?</li>
+					<li>Does the course content satisfy the needs of follow-on courses?</li>
+				</ul>
+			</div>
+
+			<div class="grid__col grid__col--1-of-3 ">
+				<br>
+				<br>
+				<br>
+
+				<input type="checkbox"><label>YES</label>
+				<input type="checkbox"><label>NO</label>
+				<br>
+				<br>
+				<input type="checkbox"><label>YES</label>
+				<input type="checkbox"><label>NO</label>
+			</div>
+			
+			<br>
+			<br>
+
+			<div class="grid__col grid__col--2-of-2">
+				<h4>ACTIONS/RECOMMENDATIONS:</h4>
+				<textarea name="" id="" cols="95" rows="10"></textarea>
+			</div>
+
+			<div class="grid__col grid__col--3-of-3">
+				<br>
+				<br>
+				<h3>III. Evaluation of Outcomes Assessments: </h3>
+				<br>
+				<br>
+
+				<h3>Recommendations for course improvement:</h3>
+				<textarea name="" id="" cols="95" rows="10"></textarea>
+				<br><br>
+				<h3>Recommendations to CEN program governance (e.g. curriculum committee):</h3>
+				<textarea name="" id="" cols="95" rows="10"></textarea>
+				<br><br>
+				<h3>Comments/Recommendations on this process:</h3>
+				<textarea name="" id="" cols="95" rows="10"></textarea>
+
+			</div>
+			<br/><br/><br/>
+			
+			<div class="grid__col grid__col--1-of-1 space">
+				<h3 class="">
+					COMPUTER ENGINEERING PROGRAM
+				</h3>
+				
+				<h3 class="">
+					SUMMARY OF COURSE COMMITTEE ANALYSIS
+				</h3>
+			</div> 
+
+			<div class="grid__col grid__col--2-of-2 space">
+				<ul>
+					<li>Course Number and Title: {{ courseNumber }}, {{ courseTitle }}</li>
+					<li>Term and Year: {{ term }}</li>
+					<li>Instructor: {{ instructor }}</li>
+					<li>Course Committee Participants: {{ courseCommitteeParticipants }}</li>
+					<br>
+					<li>Date: {{ date }}</li>
+				</ul>
+			</div>
+
+			 <table id="outcome" class="centered"
+				  <tr>
+				    <td>
+				    	<h4>Outcome: </h4>
+				    	<br/>
+				    	<p>Apply Knowledge</p>
+				    	<br/>
+				    	<h5> Number of students: </h5>
+				    </td>
+				    <td>
+				    	<h4>Evaluation: <br/><br/></h4>
+				    	<p>(satisfactory, unsatisfactory, weaknesses, identified, suggestedimprovements, remarks) </p>
+				    </td>
+				  </tr>
+				  
+				  <tr>
+				    <td class="bold">1. Instruments Chosen</td>
+				    <td>
+				    	<textarea name="" id="instruments" cols="95" rows="5">
+				    	</textarea>
+				  </tr>
+
+				  <tr>
+				    <td class="bold">2. Likert Scale Threshold(s)</td>
+				    <td>
+				    	<textarea name="" id="thresholds" cols="95" rows="5">
+				    	</textarea>
+				    </td>
+				  </tr>
+
+				  <tr>
+				    <td class="bold">3. Sample Graded Student Work</td>
+				    <td>
+				    	<textarea name="" id="gradedWork" cols="95" rows="5">
+				    	</textarea>
+				    </td>
+				  </tr>
+
+				  <tr>
+				    <td class="bold">4. Percentage of Students Achieving Outcome</td>
+				    <td>
+				    	<textarea name="" id="percentAchieved" cols="95" rows="2">
+				    	</textarea>
+				    </td>
+				  </tr>
+
+				  <tr>
+				    <td class="bold">5. Average Likert Value</td>
+				    <td>
+				    	<textarea name="" id="likert" cols="95" rows="1">
+				    	</textarea>
+				    </td>
+				  </tr>
+
+				  <tr>
+				    <td class="bold">Achievement of Outcome</td>
+				    <td>
+				    	<textarea name="" id="achievement" cols="95" rows="5">
+				    	</textarea>
+				    </td>
+				  </tr>
+
+				  <tr>
+				    <td class="bold">Suggested Improvements on Achieving Outcome</td>
+				    <td>
+				    	<textarea name="" id="improvements" cols="95" rows="5">
+				    	</textarea>
+				    </td>
+				  </tr>
+
+			</table> 
+
+			<br/><br/><br/><br/><br/>
+
+			<div id="footnotes" class="bold">
+				<h4> Instructions to Course Evaluation Committe:</h4>
+				<br/>
+				<h5> The purpose of this form is:</h5>
+				<br/>
+				<p>1. To perform *qualitative* analysis of the quantitative data of the outcomes assessed.</p>
+
+				<br/>
+				<p>2. To document the participation of several faculty in the evaluation of those assessments.</p>
+
+				<br/>
+				<p>3. To examine and evaluate the various quantitative criteria used, the instruments chosen, the Likert scale values, and sample student graded work.</p>
+
+				<br/>
+				<p>4. To generate recommendations in three categories:</p>
+				<p class="inline">(a) Recommendations to future instructors.</p>
+				<p class="inline">(b) Recommendations to curriculum governance.</p>
+				<p class="inline">(c) Recommendations on improvement of the process.</p>
+
+				<br/><br/>
+				<h4> CEN PROGRAM OUTCOMES<h4>
+
+				<br/>
+				<p>(a) an ability to apply knowledge of mathematics, statistics, computer science, and electrical engineering as it applies to computer hardware and software</p>
+
+				<br/>
+				<p>(b) an ability to design and conduct experiments, as well as to organize, analyze and interpret data.</p>
+
+				<br/>
+				<p>(c) an ability to design hardware and software systems, components, or processes to meet desired needs within realistic constraints such as economic, environmental, social, political, ethical, health and safety, manufacturability, and sustainability.</p>
+
+				<br/>
+				<p>(d) an ability to function on multi-disciplinary teams.</p>
+
+				<br/>
+				<p> (e)an ability to identify, formulate, and solve hardware and software computer engineering problems, accounting for the interaction between hardware and software.</p>
+
+				<br/>
+				<p>(f) an understanding of professional, legal, and ethical issues and responsibilities.</p>
+
+				<br/>
+				<p>(g) an ability to communicate effectively in speech and in writing, including documentation of hardware and software systems.</p>
+
+				<br/>
+				<p>(h) the broad education necessary to understand the impact of engineering solutions in a global, economic, environmental, and societal context</p>
+
+				<br/>
+				<p>(i) a recognition of the need for, and an ability to engage in life-long learning.</p>
+
+				<br/>
+				<p>(j) a knowledge of contemporary issues.</p>
+
+				<br/>
+				<p>(k) an ability to use the techniques, skills, and modern engineering tools necessary for computer engineering practice.</p>
+
+				<br/>
+				<p>(l) an ability to apply engineering and management knowledge and techniques to estimate time and resources needed to complete a computer engineering project .</p>
+
+			</div>
+
+			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+
+
+
+		</div><!-- /.grid -->
+	</div><!-- /.container -->
+</body>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

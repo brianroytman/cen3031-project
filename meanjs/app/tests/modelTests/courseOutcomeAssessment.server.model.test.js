@@ -192,7 +192,7 @@ describe('Course Model Unit Tests:', function(){
 			return courseModel1.save(function(err) {
 				should.exist(err);
 				done();
-			})
+			});
 		});
 
 		it('should be able to show an error when try to save without percentOfStudentsAchievingOutcomeAdequately', function(done){

@@ -15,7 +15,6 @@ var mongoose = require('mongoose'),
  * Store the JSON objects for the CourseCommitteeEvaluationForm
  */
 exports.create = function(req, res, next) {
-	// console.log('body: '+require('util').inspect(req.body));
 	var courseCommittee = new CourseCommittee(req.body);
 	courseCommittee.save(function(err) {
 		if (err) {
@@ -59,11 +58,11 @@ var generatePDF = function (html,id,req,res) {
 /**
  * Uses Handlebarsjs to dynamically populate a html template with a json object.
  */ 
-var generateHTML = function(courseComittee,filename,req,res) {
+var generateHTML = function(courseCommittee,filename,req,res) {
 	fs.readFile(filename, function(err,data) {
 		var template = Handlebars.compile(data.toString());
-		var result = template(courseComittee);
-		generatePDF(result,courseComittee._id,req,res);
+		var result = template(courseCommittee);
+		generatePDF(result,courseCommittee._id,req,res);
 	});
 };
 
@@ -72,7 +71,7 @@ var generateHTML = function(courseComittee,filename,req,res) {
  */
 exports.read = function(req, res) {
 	var filename = __dirname + '/pdfModels/CourseCommitteeEvaluationForm.html';
-	generateHTML(req.courseComittee,filename,req,res);
+	generateHTML(req.courseCommittee,filename,req,res);
 };
 
 
@@ -81,17 +80,17 @@ exports.read = function(req, res) {
  * Update a courseCommitteeEvaluationForm
  */
 exports.update = function(req, res) {
-	var courseComittee = req.courseComittee;
+	var courseCommittee = req.courseCommittee;
 
-	courseComittee = _.extend(courseComittee, req.body);
+	courseCommittee = _.extend(courseCommittee, req.body);
 
-	courseComittee.save(function(err) {
+	courseCommittee.save(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.json(courseComittee);
+			res.json(courseCommittee);
 		}
 	});
 };
@@ -100,15 +99,15 @@ exports.update = function(req, res) {
  * Delete a courseCommitteeEvaluationForm
  */
 exports.delete = function(req, res) {
-	var courseComittee = req.courseComittee;
+	var courseCommittee = req.courseCommittee;
 
-	courseComittee.remove(function(err) {
+	courseCommittee.remove(function(err) {
 		if (err) {
 			return res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
-			res.json(courseComittee);
+			res.json(courseCommittee);
 		}
 	});
 };
@@ -136,10 +135,11 @@ exports.list = function(req, res) {
  * CourseCommitteeEvaluationForm middleware used to 
  */
 exports.courseCommitteeEvaluationByID = function(req, res, next, id) {
-	CourseCommittee.findById(id).populate('user', 'displayName').exec(function(err, courseComittee) {
+	CourseCommittee.findById(id).populate('courseOutcomeAssessmentForm').exec(function(err, courseCommittee) {
+		// console.log('console.log: '+id);
 		if (err) return next(err);
-		if (!courseComittee) return next(new Error('Failed to load course committee ' + id));
-		req.courseComittee = courseComittee;
+		if (!courseCommittee) return next(new Error('Failed to load course committee ' + id));
+		req.courseCommittee = courseCommittee;
 		next();
 	});
 };
@@ -148,7 +148,7 @@ exports.courseCommitteeEvaluationByID = function(req, res, next, id) {
  * Not currently used, but will most likely need later.
  */
 exports.hasAuthorization = function(req, res, next) {
-	if (req.courseComittee.user.id !== req.user.id) {
+	if (req.courseCommittee.user.id !== req.user.id) {
 		return res.status(403).send({
 			message: 'User is not authorized'
 		});
