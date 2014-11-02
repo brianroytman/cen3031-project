@@ -3,55 +3,50 @@
 
 <head>
 <style>
-.grid{list-style:none;margin-left:-20px}.grid>.grid__col--2-of-2,.grid>.grid__col--3-of-3,.grid>.grid__col--4-of-4,.grid>.grid__col--5-of-5,.grid>.grid__col--6-of-6,.grid>.grid__col--8-of-8,.grid>.grid__col--12-of-12{width:100%}.grid>.grid__col--1-of-2,.grid>.grid__col--2-of-4,.grid>.grid__col--3-of-6,.grid>.grid__col--4-of-8,.grid>.grid__col--6-of-12{width:50%}.grid>.grid__col--1-of-3,.grid>.grid__col--2-of-6,.grid>.grid__col--4-of-12{width:33.33333%}.grid>.grid__col--2-of-3,.grid>.grid__col--4-of-6,.grid>.grid__col--8-of-12{width:66.66667%}.grid>.grid__col--1-of-4,.grid>.grid__col--2-of-8,.grid>.grid__col--3-of-12{width:25%}.grid>.grid__col--3-of-4,.grid>.grid__col--6-of-8,.grid>.grid__col--9-of-12{width:75%}.grid>.grid__col--push-2-of-2,.grid>.grid__col--push-3-of-3,.grid>.grid__col--push-4-of-4,.grid>.grid__col--push-5-of-5,.grid>.grid__col--push-6-of-6,.grid>.grid__col--push-8-of-8,.grid>.grid__col--push-12-of-12{margin-left:100%}.grid>.grid__col--push-1-of-2,.grid>.grid__col--push-2-of-4,.grid>.grid__col--push-3-of-6,.grid>.grid__col--push-4-of-8,.grid>.grid__col--push-6-of-12{margin-left:50%}.grid>.grid__col--push-1-of-3,.grid>.grid__col--push-2-of-6,.grid>.grid__col--push-4-of-12{margin-left:33.33333%}.grid>.grid__col--push-2-of-3,.grid>.grid__col--push-4-of-6,.grid>.grid__col--push-8-of-12{margin-left:66.66667%}.grid>.grid__col--push-1-of-4,.grid>.grid__col--push-2-of-8,.grid>.grid__col--push-3-of-12{margin-left:25%}.grid>.grid__col--push-3-of-4,.grid>.grid__col--push-6-of-8,.grid>.grid__col--push-9-of-12{margin-left:75%}.grid>.grid__col--pull-2-of-2,.grid>.grid__col--pull-3-of-3,.grid>.grid__col--pull-4-of-4,.grid>.grid__col--pull-5-of-5,.grid>.grid__col--pull-6-of-6,.grid>.grid__col--pull-8-of-8,.grid>.grid__col--pull-12-of-12{margin-left:-100%}.grid>.grid__col--pull-1-of-2,.grid>.grid__col--pull-2-of-4,.grid>.grid__col--pull-3-of-6,.grid>.grid__col--pull-4-of-8,.grid>.grid__col--pull-6-of-12{margin-left:-50%}.grid>.grid__col--pull-1-of-3,.grid>.grid__col--pull-2-of-6,.grid>.grid__col--pull-4-of-12{margin-left:-33.33333%}.grid>.grid__col--pull-2-of-3,.grid>.grid__col--pull-4-of-6,.grid>.grid__col--pull-8-of-12{margin-left:-66.66667%}.grid>.grid__col--pull-1-of-4,.grid>.grid__col--pull-2-of-8,.grid>.grid__col--pull-3-of-12{margin-left:-25%}.grid>.grid__col--pull-3-of-4,.grid>.grid__col--pull-6-of-8,.grid>.grid__col--pull-9-of-12{margin-left:-75%}.grid>.grid__col--1-of-5{width:20%}.grid>.grid__col--push-1-of-5{margin-left:20%}.grid>.grid__col--pull-1-of-5{margin-left:-20%}.grid>.grid__col--2-of-5{width:40%}.grid>.grid__col--push-2-of-5{margin-left:40%}.grid>.grid__col--pull-2-of-5{margin-left:-40%}.grid>.grid__col--3-of-5{width:60%}.grid>.grid__col--push-3-of-5{margin-left:60%}.grid>.grid__col--pull-3-of-5{margin-left:-60%}.grid>.grid__col--4-of-5{width:80%}.grid>.grid__col--push-4-of-5{margin-left:80%}.grid>.grid__col--pull-4-of-5{margin-left:-80%}.grid>.grid__col--1-of-6{width:16.66667%}.grid>.grid__col--push-1-of-6{margin-left:16.66667%}.grid>.grid__col--pull-1-of-6{margin-left:-16.66667%}.grid>.grid__col--5-of-6{width:83.33333%}.grid>.grid__col--push-5-of-6{margin-left:83.33333%}.grid>.grid__col--pull-5-of-6{margin-left:-83.33333%}.grid>.grid__col--1-of-8{width:12.5%}.grid>.grid__col--push-1-of-8{margin-left:12.5%}.grid>.grid__col--pull-1-of-8{margin-left:-12.5%}.grid>.grid__col--3-of-8{width:37.5%}.grid>.grid__col--push-3-of-8{margin-left:37.5%}.grid>.grid__col--pull-3-of-8{margin-left:-37.5%}.grid>.grid__col--5-of-8{width:62.5%}.grid>.grid__col--push-5-of-8{margin-left:62.5%}.grid>.grid__col--pull-5-of-8{margin-left:-62.5%}.grid>.grid__col--7-of-8{width:87.5%}.grid>.grid__col--push-7-of-8{margin-left:87.5%}.grid>.grid__col--pull-7-of-8{margin-left:-87.5%}.grid>.grid__col--1-of-12{width:8.33333%}.grid>.grid__col--push-1-of-12{margin-left:8.33333%}.grid>.grid__col--pull-1-of-12{margin-left:-8.33333%}.grid>.grid__col--2-of-12{width:16.66667%}.grid>.grid__col--push-2-of-12{margin-left:16.66667%}.grid>.grid__col--pull-2-of-12{margin-left:-16.66667%}.grid>.grid__col--5-of-12{width:41.66667%}.grid>.grid__col--push-5-of-12{margin-left:41.66667%}.grid>.grid__col--pull-5-of-12{margin-left:-41.66667%}.grid>.grid__col--7-of-12{width:58.33333%}.grid>.grid__col--push-7-of-12{margin-left:58.33333%}.grid>.grid__col--pull-7-of-12{margin-left:-58.33333%}.grid>.grid__col--10-of-12{width:83.33333%}.grid>.grid__col--push-10-of-12{margin-left:83.33333%}.grid>.grid__col--pull-10-of-12{margin-left:-83.33333%}.grid>.grid__col--11-of-12{width:91.66667%}.grid>.grid__col--push-11-of-12{margin-left:91.66667%}.grid>.grid__col--pull-11-of-12{margin-left:-91.66667%}.grid .grid__col{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;box-sizing:border-box;display:inline-block;margin-right:-.25em;min-height:1px;padding-left:20px;vertical-align:top}@media (max-width: 700px){.grid .grid__col{display:block;margin-left:0;margin-right:0;width:auto}}@media (max-width: 700px) and (min-width: 480px){.grid .grid__col[class*="grid__col--m-"]{display:inline-block;margin-right:-.24em}.grid .grid__col.grid__col--m-1-of-2,.grid .grid__col.grid__col--m-2-of-4{width:50%}.grid .grid__col.grid__col--m-1-of-3{width:33.33333%}.grid .grid__col.grid__col--m-1-of-3{width:66.66667%}.grid .grid__col.grid__col--m-1-of-4{width:25%}.grid .grid__col.grid__col--m-3-of-4{width:75%}}@media (max-width: 480px){.grid .grid__col[class*="grid__col--s-"]{display:inline-block;margin-right:-.24em}.grid .grid__col.grid__col--s-1-of-2,.grid .grid__col.grid__col--s-2-of-4{width:50%}.grid .grid__col.grid__col--s-1-of-3{width:33.33333%}.grid .grid__col.grid__col--s-1-of-3{width:66.66667%}.grid .grid__col.grid__col--s-1-of-4{width:25%}.grid .grid__col.grid__col--s-3-of-4{width:75%}}.grid .grid__col--centered{display:block;margin-left:auto;margin-right:auto}.grid .grid__col--d-first{float:left}.grid .grid__col--d-last{float:right}.grid.grid--no-gutter{margin-left:0;width:100%}.grid.grid--no-gutter>*{padding-left:0}.grid.grid--no-gutter .grid__col--span-all{margin-left:0;width:100%}.grid .grid__col--ab{vertical-align:bottom}.grid .grid__col--am{vertical-align:middle}
+/*  SECTIONS  */
+.section {
+	clear: both;
+	padding: 0px;
+	margin-left: 100px;
+}
 
-/* http://meyerweb.com/eric/tools/css/reset/ 
-   v2.0 | 20110126
-   License: none (public domain)
-*/
+/*  COLUMN SETUP  */
+.col {
+	display: block;
+	float:left;
+}
+.col:first-child { margin-left: 0; }
 
-html, body, div, span, applet, object, iframe,
-h1, h2, h3, h4, h5, h6, p, blockquote, pre,
-a, abbr, acronym, address, big, cite, code,
-del, dfn, em, img, ins, kbd, q, s, samp,
-small, strike, strong, sub, sup, tt, var,
-b, u, i, center,
-dl, dt, dd, ol, ul, li,
-fieldset, form, label, legend,
-table, caption, tbody, tfoot, thead, tr, th, td,
-article, aside, canvas, details, embed, 
-figure, figcaption, footer, header, hgroup, 
-menu, nav, output, ruby, section, summary,
-time, mark, audio, video {
+
+/*  GROUPING  */
+.group:before,
+.group:after {
+	content:"";
+	display:table;
+}
+.group:after {
+	clear:both;
+}
+
+/*  GRID OF THREE  */
+.span_2_of_2 {
+	width: 25%;
+}
+.span_1_of_2 {
+	width: 66%;
+}
+.span_1_of_1 {
+	width: 80%;
+}
+
+ol, ul, h2, h3, h4, h5, h6, p, tr, td, br {
+	list-style: none;
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
 	font: inherit;
 	vertical-align: baseline;
-}
-/* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
-footer, header, hgroup, menu, nav, section {
-	display: block;
-}
-body {
-	line-height: 1;
-}
-ol, ul {
-	list-style: none;
-}
-blockquote, q {
-	quotes: none;
-}
-blockquote:before, blockquote:after,
-q:before, q:after {
-	content: '';
-	content: none;
-}
-table {
-	border-collapse: collapse;
-	border-spacing: 0;
 }
 
 html {
@@ -122,222 +117,254 @@ td
 	font-weight: bold;
 }
 
-
-
 </style>
-
-
+<link rel="stylesheet" href="custom.css"> <!-- Our custom stylings for this project -->
 </head>
 
 <body>
-	<div class="container">
-	
-		<div class="grid">
 
-			<div class="grid__col grid__col--3-of-3">
-				<h2 class="centered">
-					Computer Engineering Program
-				</h2>
+	<div class="section group">
+		<div class="col span_1_of_1">
+			<h2 class="centered">
+				Computer Engineering Program
+			</h2>
 				
-				<h2 class="centered">
-					Course Committee Outcomes Assessment Evaluation Form
-				</h2>
-			</div> 
-
+			<h2 class="centered">
+				Course Committee Outcomes Assessment Evaluation Form
+			</h2>
+		</div> 
+	</div>
 			<br>
 			<br>
-			
-			<div class="grid__col grid__col--2-of-2">
-				<ul>
-					<li>Course Number and Title: {{ courseNumber }}, {{ courseTitle }}</li>
-					<li>Term and Year: {{ term }}</li>
-					<li>Instructor: {{ instructor }}</li>
-					<li>Course Committee Participants: {{ courseCommitteeParticipants }}</li>
-					<br>
-					<li>Date: {{ date }}</li>
-				</ul>
-			</div>
-
-			<div class="grid__col grid__col--1-of-2"></div>
-
-			<div class="grid__col grid__col--2-of-3">
+	<div class="section group">		
+		<div class="col span_1_of_1">
+			<ul>
+				<li>Course Number and Title: {{ courseNumber }}, {{ courseTitle }}</li>
+				<li>Term and Year: {{ term }}</li>
+				<li>Instructor: {{ instructor }}</li>
+				<li>Course Committee Participants: {{ courseCommitteeParticipants }}</li>
 				<br>
-				<h3>I. Course Issues:</h3>
-				<br>
+				<li>Date: {{ date }}</li>
+			</ul>
+		</div>
+	</div>
 
-				<ul>
-					<li>Syllabus: Does the syllabus reflect current content?</li>
-					<li>Are there topics that should be dropped from the course?</li>
-					<li>Are there topics that should be added to the course?</li>
-					
-					<br>
+	<div class="section group">		
+		<div class="col span_1_of_1">
+			<br>
+			<h3>I. Course Issues:</h3>
+			<br>
+		</div>
+	</div>
+			<ul>
+				<div class="section group">	
+					<div class="col span_1_of_2">
+						<li>Syllabus: Does the syllabus reflect current content? </li>
+					</div>
+					<div class="col span_2_of_2">
+						<input type="checkbox"><label>YES</label>
+						<input type="checkbox"><label>NO</label>
+					</div>
+				</div>
+						
+				<div class="section group">	
+					<div class="col span_1_of_2">
+						<li>Are there topics that should be dropped from the course? </li>
+					</div>
+					<div class="col span_2_of_2">
+						<input type="checkbox"><label>YES</label>
+						<input type="checkbox"><label>NO</label>
+					</div>
+				</div>
 
-					<li>Textbook: Is the textbook working well?</li>
-					<li>Should changes be considered for the next academic year?</li>
-					<li>Are there new books available that should be evaluated?</li>
-					<li>Does the book map well onto the syllabus?</li>
+				<div class="section group">	
+					<div class="col span_1_of_2">
+						<li>Are there topics that should be added to the course? </li>
+					</div>
+					<div class="col span_2_of_2">
+						<input type="checkbox"><label>YES</label>
+						<input type="checkbox"><label>NO</label>
+					</div>
+				</div>
 
-					<br>
+				<div class="section group">	
+					<div class="col span_1_of_2">
+						<li>Textbook: Is the textbook working well?</li>
+					</div>
+					<div class="col span_2_of_2">
+						<input type="checkbox"><label>YES</label>
+						<input type="checkbox" checked><label>NO</label>
+					</div>
+				</div>
 
-					<li>Do other assessments (performance/exit surveys,student feedback) indicate issues that need to be addressed?</li>
+				<div class="section group">	
+					<div class="col span_1_of_2">
+						<li>Should changes be considered for the next academic year?</li>
+					</div>
+					<div class="col span_2_of_2">
+						<input type="checkbox" checked><label>YES</label>
+						<input type="checkbox"><label>NO</label>
+					</div>
+				</div>
 
-					<br>
+				<div class="section group">	
+					<div class="col span_1_of_2">
+						<li>Are there new books available that should be evaluated?</li>
+					</div>
+					<div class="col span_2_of_2">
+						<input type="checkbox" checked><label>YES</label>
+						<input type="checkbox"><label>NO</label>
+					</div>
+				</div>
 
-					<li>Student Performance: Did students master the material?</li>
+				<div class="section group">	
+					<div class="col span_1_of_2">
+						<li>Does the book map well onto the syllabus?</li>
+					</div>
+					<div class="col span_2_of_2">
+						<input type="checkbox" checked><label>YES</label>
+						<input type="checkbox"><label>NO</label>
+					</div>
+				</div>
+
+				<div class="section group">	
+					<div class="col span_1_of_2">
+						<li>Do other assessments (performance/exit surveys,student feedback) indicate issues that need to be addressed?</li>
+					</div>
+					<div class="col span_2_of_2">
+						<input type="checkbox" checked><label>YES</label>
+						<input type="checkbox"><label>NO</label>
+					</div>
+				</div>
+				<div class="section group">	
+					<div class="col span_1_of_2">
+						<li>Student Performance: Did students master the material?</li>
+					</div>
+					<div class="col span_2_of_2">
+						<input type="checkbox" checked><label>YES</label>
+						<input type="checkbox"><label>NO</label>
+					</div>
+				</div>
+				<div class="section group">	
+					<div class="col span_1_of_2">
+						
 					<li>Are there problems in the their knowledge of key concepts?</li>
-				</ul>
-			</div>
+					</div>
+					<div class="col span_2_of_2">
+						<input type="checkbox" checked><label>YES</label>
+						<input type="checkbox"><label>NO</label>
+					</div>
+				</div>
+			</ul>
 
-			<div class="grid__col grid__col--1-of-3 ">
-				<br>
-				<br>
-				<br>
 
-				<input type="checkbox" {{#if syllabusReflectCurrentContent}}checked{{/if}}>
-				<input type="checkbox" 
-					{{#if syllabusReflectCurrentContent}} {{/if}}>
-					<label>NO</label>
 				
-				<br>
-				<input type="checkbox"
-					{{#if droppedTopics}}checked{{/if}}>
-					<label>YES</label>
-				<input type="checkbox"
-					{{#if droppedTopics}}{{/if}}>
-					<label>NO</label>
-				
-				<br>
-
-				<input type="checkbox"
-					{{#if addedTopics}}checked{{/if}}>
-					<label>YES</label>
-				<input type="checkbox"
-					{{#if addedTopics}}{{/if}}>
-					<label>NO</label>
-
-				<br>
-				<br>
-
-				<input type="checkbox"
-					{{#if textbookWorkingWell}}checked{{/if}}>
-					<label>YES</label>
-				<input type="checkbox"
-					{{#if textbookWorkingWell}}{{/if}}>
-					<label>NO</label>
-				<br>
-				<input type="checkbox"
-					{{#if changesRequiredForNextAcademicYear}}checked{{/if}}>
-					<label>YES</label>
-				<input type="checkbox"
-					{{#if changesRequiredForNextAcademicYear}}{{/if}}>
-					<label>NO</label>
-				<br>
-				<input type="checkbox"><label>YES</label>
-				<input type="checkbox"><label>NO</label>
-				<br>
-				<input type="checkbox"><label>YES</label>
-				<input type="checkbox"><label>NO</label>
-
-				<br>
-				<br>
-
-				<br>
-				<input type="checkbox"><label>YES</label>
-				<input type="checkbox"><label>NO</label>
-
-				<br>
-				<br>
-
-				<input type="checkbox"><label>YES</label>
-				<input type="checkbox"><label>NO</label>
-				<br>
-				<input type="checkbox"><label>YES</label>
-				<input type="checkbox"><label>NO</label>
-			</div>
-
-			<br>
-			<br>
-
-			<div class="grid__col grid__col--2-of-2">
-				<h4>ACTIONS/RECOMMENDATIONS:</h4>
-				<textarea name="" id="" cols="95" rows="10"></textarea>
-			</div>
+	<div class="section group">			
+		<div class="col span_1_of_1">
+			<h4>ACTIONS/RECOMMENDATIONS:</h4>
+	
+				<textarea name="" id="" cols="95" rows="10"></textarea> 
+		</div>
+	</div>
 			
+	<div class="section group">			
+		<div class="col span_1_of_1">
+			<br>
+			<h3>II. Program Issues:</h3>
+			<br>
+		</div>
+	</div>
 		
-
-			<div class="grid__col grid__col--2-of-3">
-				<br>
-				<h3>II. Program Issues:</h3>
-				<br>
-				<ul>
+		<ul>
+			<div class="section group">	
+				<div class="col span_1_of_2">
 					<li>Are the pre-requisites still appropriate for this course?</li>
+				</div>
+				<div class="col span_2_of_2">
+					<input type="checkbox" checked><label>YES</label>
+					<input type="checkbox"><label>NO</label>
+				</div>
+			</div>
+
+			<div class="section group">	
+				<div class="col span_1_of_2">
 					<li>Does the course content satisfy the needs of follow-on courses?</li>
-				</ul>
-			</div>
+				</div>
+				<div class="col span_2_of_2">
+					<input type="checkbox" checked><label>YES</label>
+					<input type="checkbox"><label>NO</label>
+				</div>
+			</div>		
+		</ul>
 
-			<div class="grid__col grid__col--1-of-3 ">
-				<br>
-				<br>
-				<br>
-
-				<input type="checkbox"><label>YES</label>
-				<input type="checkbox"><label>NO</label>
-				<br>
-				<br>
-				<input type="checkbox"><label>YES</label>
-				<input type="checkbox"><label>NO</label>
-			</div>
-			
 			<br>
 			<br>
+	<div class="section group">			
+		<div class="col span_1_of_1">
+			<h4>ACTIONS/RECOMMENDATIONS:</h4>
+			<textarea name="" id="" cols="95" rows="10"></textarea>
+		</div>
+	</div>
 
-			<div class="grid__col grid__col--2-of-2">
-				<h4>ACTIONS/RECOMMENDATIONS:</h4>
-				<textarea name="" id="" cols="95" rows="10"></textarea>
-			</div>
-
-			<div class="grid__col grid__col--3-of-3">
-				<br>
-				<br>
-				<h3>III. Evaluation of Outcomes Assessments: </h3>
-				<br>
-				<br>
-
-				<h3>Recommendations for course improvement:</h3>
+	<div class="section group">			
+		<div class="col span_1_of_1">
+			<br>
+			<br>
+			<h3>III. Evaluation of Outcomes Assessments: </h3>
+			<br>
+			<br>
+		</div>
+	</div>
+	<div class="section group">	
+		<div class="col span_1_of_1">
+			<h3>Recommendations for course improvement:</h3>
 				<textarea name="" id="" cols="95" rows="10"></textarea>
 				<br><br>
-				<h3>Recommendations to CEN program governance (e.g. curriculum committee):</h3>
+		</div>
+	</div>
+	<div class="section group">	
+		<div class="col span_1_of_1">
+			<h3>Recommendations to CEN program governance (e.g. curriculum committee):</h3>
 				<textarea name="" id="" cols="95" rows="10"></textarea>
 				<br><br>
-				<h3>Comments/Recommendations on this process:</h3>
+		</div>
+	</div>
+	<div class="section group">	
+		<div class="col span_1_of_1">
+			<h3>Comments/Recommendations on this process:</h3>
 				<textarea name="" id="" cols="95" rows="10"></textarea>
-
-			</div>
+		</div>
+	</div>
 			<br/><br/><br/>
-			
-			<div class="grid__col grid__col--1-of-1 space">
-				<h3 class="">
-					COMPUTER ENGINEERING PROGRAM
-				</h3>
-				
-				<h3 class="">
-					SUMMARY OF COURSE COMMITTEE ANALYSIS
-				</h3>
-			</div> 
 
-			<div class="grid__col grid__col--2-of-2 space">
-				<ul>
-					<li>Course Number and Title: {{ courseNumber }}, {{ courseTitle }}</li>
-					<li>Term and Year: {{ term }}</li>
-					<li>Instructor: {{ instructor }}</li>
-					<li>Course Committee Participants: {{ courseCommitteeParticipants }}</li>
-					<br>
-					<li>Date: {{ date }}</li>
-				</ul>
-			</div>
 
-			 <table id="outcome" class="centered"
-				  <tr>
+	<div class="section group">	
+		<div class="col span_1_of_1">
+			<h3 class="">
+				COMPUTER ENGINEERING PROGRAM
+			</h3>
+			<h3 class="">
+				SUMMARY OF COURSE COMMITTEE ANALYSIS
+			</h3>
+		</div> 
+	</div>
+	<div class="section group">	
+		<div class="col span_1_of_1">
+			<ul>
+				<li>Course Number and Title: {{ courseNumber }}, {{ courseTitle }}</li>
+				<li>Term and Year: {{ term }}</li>
+				<li>Instructor: {{ instructor }}</li>
+				<li>Course Committee Participants: {{ courseCommitteeParticipants }}</li>
+				<br>
+				<li>Date: {{ date }}</li>
+			</ul>
+		</div>
+	</div>
+
+	<div class="section group">	
+		<div class="col span_1_of_1">
+			<table id="outcome" class="centered" >
+				<tr>
 				    <td>
 				    	<h4>Outcome: </h4>
 				    	<br/>
@@ -354,14 +381,15 @@ td
 				  <tr>
 				    <td class="bold">1. Instruments Chosen</td>
 				    <td>
-				    	<textarea name="" id="instruments" cols="95" rows="5">
+				    	<textarea name="" id="instruments" cols="80" rows="5">
 				    	</textarea>
+				    </td>
 				  </tr>
 
 				  <tr>
 				    <td class="bold">2. Likert Scale Threshold(s)</td>
 				    <td>
-				    	<textarea name="" id="thresholds" cols="95" rows="5">
+				    	<textarea name="" id="thresholds" cols="80" rows="5">
 				    	</textarea>
 				    </td>
 				  </tr>
@@ -369,7 +397,7 @@ td
 				  <tr>
 				    <td class="bold">3. Sample Graded Student Work</td>
 				    <td>
-				    	<textarea name="" id="gradedWork" cols="95" rows="5">
+				    	<textarea name="" id="gradedWork" cols="80" rows="5">
 				    	</textarea>
 				    </td>
 				  </tr>
@@ -377,7 +405,7 @@ td
 				  <tr>
 				    <td class="bold">4. Percentage of Students Achieving Outcome</td>
 				    <td>
-				    	<textarea name="" id="percentAchieved" cols="95" rows="2">
+				    	<textarea name="" id="percentAchieved" cols="80" rows="2">
 				    	</textarea>
 				    </td>
 				  </tr>
@@ -385,7 +413,7 @@ td
 				  <tr>
 				    <td class="bold">5. Average Likert Value</td>
 				    <td>
-				    	<textarea name="" id="likert" cols="95" rows="1">
+				    	<textarea name="" id="likert" cols="80" rows="1">
 				    	</textarea>
 				    </td>
 				  </tr>
@@ -393,7 +421,7 @@ td
 				  <tr>
 				    <td class="bold">Achievement of Outcome</td>
 				    <td>
-				    	<textarea name="" id="achievement" cols="95" rows="5">
+				    	<textarea name="" id="achievement" cols="80" rows="5">
 				    	</textarea>
 				    </td>
 				  </tr>
@@ -401,15 +429,24 @@ td
 				  <tr>
 				    <td class="bold">Suggested Improvements on Achieving Outcome</td>
 				    <td>
-				    	<textarea name="" id="improvements" cols="95" rows="5">
+				    	<textarea name="" id="improvements" cols="80" rows="5">
 				    	</textarea>
 				    </td>
+
 				  </tr>
 
 			</table> 
+			
+		</div>
+	</div>
+	
+			
 
 			<br/><br/><br/><br/><br/>
-
+			
+	<div class="section group">	
+		<div class="col span_1_of_1">
+		
 			<div id="footnotes" class="bold">
 				<h4> Instructions to Course Evaluation Committe:</h4>
 				<br/>
@@ -467,15 +504,10 @@ td
 
 				<br/>
 				<p>(l) an ability to apply engineering and management knowledge and techniques to estimate time and resources needed to complete a computer engineering project .</p>
-
+				<br/><br/><br/><br/><br/><br/>
 			</div>
-
-			<br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
-
-
-
-		</div><!-- /.grid -->
-	</div><!-- /.container -->
+		</div>
+	</div>
 </body>
 
 
