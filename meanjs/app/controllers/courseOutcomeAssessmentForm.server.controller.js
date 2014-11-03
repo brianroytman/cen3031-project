@@ -78,8 +78,7 @@ var generateHTML = function(course,filename,req,res,next) {
  */
 exports.read = function(req, res) {
 	var filename = __dirname + '/pdfModels/CourseOutcomeAssessmentForm.html';
-	var temp = req.course;
-	generateHTML(temp,filename,req,res);
+	generateHTML(req.course,filename,req,res);
 };
 
 

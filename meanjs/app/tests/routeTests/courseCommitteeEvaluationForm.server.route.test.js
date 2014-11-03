@@ -90,21 +90,6 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 			});
 		});
 
-/*
-		it('should fail to save a form without an outcome', function(done) {
-			course2.term = ''
-			request
-				.post('/courseOutcomeAssessment')
-				.send(course2)
-      			.end(function (err,res) {
-      				res.status.should.equal(400);
-      				should.exist(err);
-      				done();
-				
-				});
-      	});
-*/
-
 		it('should return the newly created CourseCommitteeEvaluationForm', function(done) {
 			request
 				.get('/courseCommitteeEvaluation')
@@ -173,7 +158,7 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 	});
 	
 	after(function(done) {
-
+		CourseModel.remove().exec();
 		CourseCommittee.remove().exec();
 		done();
 	});

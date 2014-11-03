@@ -118,7 +118,6 @@ td
 }
 
 </style>
-<link rel="stylesheet" href="custom.css"> <!-- Our custom stylings for this project -->
 </head>
 
 <body>
@@ -139,9 +138,9 @@ td
 	<div class="section group">		
 		<div class="col span_1_of_1">
 			<ul>
-				<li>Course Number and Title: {{ courseNumber }}, {{ courseTitle }}</li>
-				<li>Term and Year: {{ term }}</li>
-				<li>Instructor: {{ instructor }}</li>
+				<li>Course Number and Title: {{ courseOutcomeAssessmentForm.courseNumber }} , {{ courseOutcomeAssessmentForm.courseTitle}} </li>
+				<li>Term and Year: {{ courseOutcomeAssessmentForm.term }}</li>
+				<li>Instructor: {{ courseOutcomeAssessmentForm.instructor }}</li>
 				<li>Course Committee Participants: {{ courseCommitteeParticipants }}</li>
 				<br>
 				<li>Date: {{ date }}</li>
@@ -162,8 +161,8 @@ td
 						<li>Syllabus: Does the syllabus reflect current content? </li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox"><label>YES</label>
-						<input type="checkbox"><label>NO</label>
+						<input type="checkbox" {{#if syllabusReflectCurrentContent }} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless syllabusReflectCurrentContent }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 						
@@ -172,8 +171,8 @@ td
 						<li>Are there topics that should be dropped from the course? </li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox"><label>YES</label>
-						<input type="checkbox"><label>NO</label>
+						<input type="checkbox" {{#if droppedTopics}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless droppedTopics }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 
@@ -182,8 +181,8 @@ td
 						<li>Are there topics that should be added to the course? </li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox"><label>YES</label>
-						<input type="checkbox"><label>NO</label>
+						<input type="checkbox" {{#if addedTopics}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless addedTopics }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 
@@ -192,8 +191,8 @@ td
 						<li>Textbook: Is the textbook working well?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox"><label>YES</label>
-						<input type="checkbox" checked><label>NO</label>
+						<input type="checkbox" {{#if textbookWorkingWell}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless textbookWorkingWell }} checked {{/unless}} ><label>NO</label>
 					</div>
 				</div>
 
@@ -202,8 +201,8 @@ td
 						<li>Should changes be considered for the next academic year?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" checked><label>YES</label>
-						<input type="checkbox"><label>NO</label>
+						<input type="checkbox" {{#if changesRequiredForNextAcademicYear}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless changesRequiredForNextAcademicYear }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 
@@ -212,8 +211,8 @@ td
 						<li>Are there new books available that should be evaluated?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" checked><label>YES</label>
-						<input type="checkbox"><label>NO</label>
+						<input type="checkbox" {{#if newBooksToBeEvaluated}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless newBooksToBeEvaluated }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 
@@ -222,8 +221,8 @@ td
 						<li>Does the book map well onto the syllabus?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" checked><label>YES</label>
-						<input type="checkbox"><label>NO</label>
+						<input type="checkbox" {{#if bookMapWellToSyllabus}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless bookMapWellToSyllabus }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 
@@ -232,8 +231,8 @@ td
 						<li>Do other assessments (performance/exit surveys,student feedback) indicate issues that need to be addressed?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" checked><label>YES</label>
-						<input type="checkbox"><label>NO</label>
+						<input type="checkbox" {{#if otherEvaluationsIndicateIssues}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless otherEvaluationsIndicateIssues }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 				<div class="section group">	
@@ -241,8 +240,8 @@ td
 						<li>Student Performance: Did students master the material?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" checked><label>YES</label>
-						<input type="checkbox"><label>NO</label>
+						<input type="checkbox" {{#if didStudentsMasterMaterial}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless didStudentsMasterMaterial }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 				<div class="section group">	
@@ -251,8 +250,8 @@ td
 					<li>Are there problems in the their knowledge of key concepts?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" checked><label>YES</label>
-						<input type="checkbox"><label>NO</label>
+						<input type="checkbox" {{#if problemsWithKnowledgeInKeyConcepts}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless problemsWithKnowledgeInKeyConcepts }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 			</ul>
@@ -263,7 +262,7 @@ td
 		<div class="col span_1_of_1">
 			<h4>ACTIONS/RECOMMENDATIONS:</h4>
 	
-				<textarea name="" id="" cols="95" rows="10"></textarea> 
+				<textarea name="" id="" cols="95" rows="10"> {{sectionIActionsRecommendations}}</textarea> 
 		</div>
 	</div>
 			
@@ -281,8 +280,8 @@ td
 					<li>Are the pre-requisites still appropriate for this course?</li>
 				</div>
 				<div class="col span_2_of_2">
-					<input type="checkbox" checked><label>YES</label>
-					<input type="checkbox"><label>NO</label>
+					<input type="checkbox" {{#if prereqsStillAppropriate}} checked {{/if}}><label>YES</label>
+					<input type="checkbox" {{#unless prereqsStillAppropriate}} checked {{/unless}}><label>NO</label>
 				</div>
 			</div>
 
@@ -291,8 +290,8 @@ td
 					<li>Does the course content satisfy the needs of follow-on courses?</li>
 				</div>
 				<div class="col span_2_of_2">
-					<input type="checkbox" checked><label>YES</label>
-					<input type="checkbox"><label>NO</label>
+					<input type="checkbox" {{#if satisfyNeedsOfFollowupCourses}} checked {{/if}}><label>YES</label>
+					<input type="checkbox" {{#unless satisfyNeedsOfFollowupCourses }} checked {{/unless}}><label>NO</label>
 				</div>
 			</div>		
 		</ul>
@@ -302,7 +301,7 @@ td
 	<div class="section group">			
 		<div class="col span_1_of_1">
 			<h4>ACTIONS/RECOMMENDATIONS:</h4>
-			<textarea name="" id="" cols="95" rows="10"></textarea>
+			<textarea name="" id="" cols="95" rows="10"> {{ sectionIIActionsRecommendations }}</textarea>
 		</div>
 	</div>
 
@@ -318,21 +317,21 @@ td
 	<div class="section group">	
 		<div class="col span_1_of_1">
 			<h3>Recommendations for course improvement:</h3>
-				<textarea name="" id="" cols="95" rows="10"></textarea>
+				<textarea name="" id="" cols="95" rows="10"> {{recommendationsForCourseImprovement }}</textarea>
 				<br><br>
 		</div>
 	</div>
 	<div class="section group">	
 		<div class="col span_1_of_1">
 			<h3>Recommendations to CEN program governance (e.g. curriculum committee):</h3>
-				<textarea name="" id="" cols="95" rows="10"></textarea>
+				<textarea name="" id="" cols="95" rows="10"> {{ recommendationsToCENProgramGovernance }}</textarea>
 				<br><br>
 		</div>
 	</div>
 	<div class="section group">	
 		<div class="col span_1_of_1">
 			<h3>Comments/Recommendations on this process:</h3>
-				<textarea name="" id="" cols="95" rows="10"></textarea>
+				<textarea name="" id="" cols="95" rows="10"> {{sectionIIIRecommendationsComments}}</textarea>
 		</div>
 	</div>
 			<br/><br/><br/>
@@ -351,9 +350,9 @@ td
 	<div class="section group">	
 		<div class="col span_1_of_1">
 			<ul>
-				<li>Course Number and Title: {{ courseNumber }}, {{ courseTitle }}</li>
-				<li>Term and Year: {{ term }}</li>
-				<li>Instructor: {{ instructor }}</li>
+				<li>Course Number and Title: {{ courseOutcomeAssessmentForm.courseNumber }}, {{ courseOutcomeAssessmentForm.courseTitle }}</li>
+				<li>Term and Year: {{ courseOutcomeAssessmentForm.term }}</li>
+				<li>Instructor: {{ courseOutcomeAssessmentForm.instructor }}</li>
 				<li>Course Committee Participants: {{ courseCommitteeParticipants }}</li>
 				<br>
 				<li>Date: {{ date }}</li>

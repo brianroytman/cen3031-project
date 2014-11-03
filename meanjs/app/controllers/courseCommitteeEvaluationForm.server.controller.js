@@ -8,6 +8,7 @@ var mongoose = require('mongoose'),
 	CourseCommittee = mongoose.model('CourseCommitteeEvaluationForm'),
 	Handlebars = require('handlebars'),
 	phantom = require('phantom'),
+	wkhtmltopdf = require('wkhtmltopdf'),
 	fs = require('fs'),
 	_ = require('lodash');
 
@@ -46,12 +47,24 @@ var generatePDF = function (html,id,req,res) {
       			ph.exit();
 				res.download(path, 'report.pdf', function(err) {
 					if(err) {
-						console.log('Err' + err);
+						throw err;
 					}
 				});
       		});  	
     	});
   	});
+
+	/*
+	var path = __dirname + '/pdfs/' + id + '.pdf';
+	wkhtmltopdf(html, {output: path, pageSize: 'A3'}, function(code, signal) {
+		res.download(path,'report.pdf',function(err) {
+			if(err) {
+				throw err;
+			}
+		});
+	});
+*/
+
 
 };
 
