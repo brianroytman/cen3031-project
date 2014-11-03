@@ -8,6 +8,8 @@ var mongoose = require('mongoose'),
 	CourseCommittee = mongoose.model('CourseCommitteeEvaluationForm'),
 	Handlebars = require('handlebars'),
 	phantom = require('phantom'),
+	wkhtmltopdf = require('wkhtmltopdf'),
+
 	fs = require('fs'),
 	_ = require('lodash');
 
@@ -15,7 +17,6 @@ var mongoose = require('mongoose'),
  * Store the JSON objects for the CourseCommitteeEvaluationForm
  */
 exports.create = function(req, res, next) {
-	// console.log('body: '+require('util').inspect(req.body));
 	var courseCommittee = new CourseCommittee(req.body);
 	courseCommittee.save(function(err) {
 		if (err) {
@@ -38,6 +39,7 @@ exports.create = function(req, res, next) {
  * Might have to change it so that is returns the url instead of the actual file.
  */
 var generatePDF = function (html,id,req,res) {
+	/*
 	phantom.create(function (ph) {
   		ph.createPage(function (page) {
      		page.setContent(html);
@@ -52,6 +54,15 @@ var generatePDF = function (html,id,req,res) {
 				});
       		});  	
     	});
+  	});
+*/
+  	var path = __dirname + '/pdfs/' + id + '.pdf';
+  	wkhtmltopdf(html, { pageSize: 'A3', output: path },  function() {
+  		res.download(path, 'report.pdf', function(err) {
+					if(err) {
+						throw err;
+					}
+		});
   	});
 
 };
