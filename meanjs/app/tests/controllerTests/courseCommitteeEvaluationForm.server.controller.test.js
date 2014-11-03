@@ -71,8 +71,9 @@ describe('CourseCommitteeEvaluationForm Contoller Unit Tests:', function() {
 				recommendationsToCENProgramGovernance: 'Give me a raise',
 				sectionIIIRecommendationsComments: 'This is test for section III',
 				courseOutcomeAssessmentForm: courseModel1
-
 			});
+
+			// console.log('util.inspect: '+util.inspect(courseEvaluation));
 
 			req = httpMocks.createRequest({
 				method: 'POST',
@@ -101,48 +102,142 @@ describe('CourseCommitteeEvaluationForm Contoller Unit Tests:', function() {
 			controller.create(req,res, function() {
 				var code = JSON.parse(res._getStatusCode());
 				var data = JSON.parse(res._getData());
-				var object;
+				data.prereqsStillAppropriate.should.equal(courseEvaluation.prereqsStillAppropriate);
 				CourseModel.findById(courseEvaluation.courseOutcomeAssessmentForm).exec(function(err, course) {
-					object = course;
-					object.courseNumber.should.equal(courseModel1.courseNumber);
+					course.courseNumber.should.equal(courseModel1.courseNumber);
 					code.should.equal(200);
 					done();
 				});
 			});
 		});
 
-		// it('should fail to create a new form without a course description.', function(done) {
-		// 	courseEvaluation.description = '';
-		// 	req.body = courseEvaluation;
-		// 	controller.create(req,res, function() {
-		// 		var code = JSON.parse(res._getStatusCode());
-		// 		code.should.equal(400);
-		// 		done();
-		// 	});
-  //     	});
+		it('should fail to create a new form without a course description.', function(done) {
+			courseEvaluation.description = '';
+		 	req.body = courseEvaluation;
+		 	controller.create(req,res, function() {
+		 		var code = JSON.parse(res._getStatusCode());
+		 		code.should.equal(400);
+		 		done();
+		 	});
+       	});
+       	it('should fail to create a new form without courseCommitteeParticipants.', function(done) {
+			courseEvaluation.courseCommitteeParticipants = '';
+		 	req.body = courseEvaluation;
+		 	controller.create(req,res, function() {
+		 		var code = JSON.parse(res._getStatusCode());
+		 		code.should.equal(400);
+		 		done();
+		 	});
+       	});
+       	it('should fail to create a new form without droppedTopics.', function(done) {
+			courseEvaluation.droppedTopics = null,
+		 	req.body = courseEvaluation;
+		 	controller.create(req,res, function() {
+		 		var code = JSON.parse(res._getStatusCode());
+		 		code.should.equal(400);
+		 		done();
+		 	});
+       	});
+       	it('should fail to create a new form without addedTopics.', function(done) {
+			courseEvaluation.addedTopics = null,
+		 	req.body = courseEvaluation;
+		 	controller.create(req,res, function() {
+		 		var code = JSON.parse(res._getStatusCode());
+		 		code.should.equal(400);
+		 		done();
+		 	});
+       	});
+       	it('should fail to create a new form without textbookWorkingWell.', function(done) {
+			courseEvaluation.textbookWorkingWell = null,
+		 	req.body = courseEvaluation;
+		 	controller.create(req,res, function() {
+		 		var code = JSON.parse(res._getStatusCode());
+		 		code.should.equal(400);
+		 		done();
+		 	});
+       	});
+       	it('should fail to create a new form without otherEvaluationsIndicateIssues.', function(done) {
+			courseEvaluation.otherEvaluationsIndicateIssues = null,
+		 	req.body = courseEvaluation;
+		 	controller.create(req,res, function() {
+		 		var code = JSON.parse(res._getStatusCode());
+		 		code.should.equal(400);
+		 		done();
+		 	});
+       	});
+
+       	it('should fail to create a new form without sectionIActionsRecommendations.', function(done) {
+			courseEvaluation.sectionIActionsRecommendations = '',
+		 	req.body = courseEvaluation;
+		 	controller.create(req,res, function() {
+		 		var code = JSON.parse(res._getStatusCode());
+		 		code.should.equal(400);
+		 		done();
+		 	});
+       	});
+
+       	it('should fail to create a new form without sectionIIActionsRecommendations.', function(done) {
+			courseEvaluation.sectionIIActionsRecommendations = '',
+		 	req.body = courseEvaluation;
+		 	controller.create(req,res, function() {
+		 		var code = JSON.parse(res._getStatusCode());
+		 		code.should.equal(400);
+		 		done();
+		 	});
+       	});
+
      });
 
-			
-	// describe('CourseCommitteeEvaluationForm update Tests', function() {
-	// 	it('should successfully update a already created form', function(done) {
-	// 		controller.create(req,res, function() {
-	// 			var code = JSON.parse(res._getStatusCode());
-	// 			code.should.equal(200);
-	// 			var data = JSON.parse(res._getData());
-	// 			var id = data._id;
-	// 			CourseCommittee.findById(id).exec(function(err, courseComittee1) {
-	// 				req.courseComittee1 = courseComittee1;
-	// 				req.body = {description : 'test course committee'};
-	// 				controller.update(req,res2, function() {
-	// 					data = JSON.parse(res2._getData());
-	// 					code = res2._getStatusCode();
-	// 					code.should.equal(200);
-	// 					data.courseNumber.should.equal('test course committee');
-	// 					done();
-	// 				});
-	// 			});
-	// 		});
-	// 	});
+	describe('CourseCommitteeEvaluationForm update Tests', function() {
+		it('should successfully update a already created form', function(done) {
+	 		controller.create(req,res, function() {
+				var code = JSON.parse(res._getStatusCode());
+				var data = JSON.parse(res._getData());
+				var id = data._id;
+				data.prereqsStillAppropriate.should.equal(courseEvaluation.prereqsStillAppropriate);
+				CourseModel.findById(courseEvaluation.courseOutcomeAssessmentForm).exec(function(err, course) {
+					course.courseNumber.should.equal(courseModel1.courseNumber);
+					code.should.equal(200);
+					CourseCommittee.findById(id).exec(function(err, courseComittee1) {
+	 					req.courseCommittee = courseComittee1;
+	 					req.body = {courseCommitteeParticipants : 'test course committee'};
+	 					controller.update(req,res2, function() {
+							data = JSON.parse(res2._getData());
+	 						code = res2._getStatusCode();
+	 						code.should.equal(200);
+	 						data.courseCommitteeParticipants.should.equal('test course committee');
+	 						done();
+	 					});
+	 				});
+				});
+			});
+		});
+/*
+		it('should fail to update a already created form', function(done) {
+	 		controller.create(req,res, function() {
+				var code = JSON.parse(res._getStatusCode());
+				var data = JSON.parse(res._getData());
+				var id = data._id;
+				data.prereqsStillAppropriate.should.equal(courseEvaluation.prereqsStillAppropriate);
+				CourseModel.findById(courseEvaluation.courseOutcomeAssessmentForm).exec(function(err, course) {
+					course.courseNumber.should.equal(courseModel1.courseNumber);
+					code.should.equal(200);
+					CourseCommittee.findById(id).exec(function(err, courseComittee1) {
+	 					req.courseCommittee = courseComittee1;
+	 					req.body = {courseCommitteeParticipants : ''};
+	 					controller.update(req,res2, function() {
+							data = JSON.parse(res2._getData());
+	 						code = res2._getStatusCode();
+	 						code.should.equal(400);
+	 						done();
+	 					});
+	 				});
+				});
+			});
+		});
+	 			
+*/
+	 	
 
 	// 	it('should fail to update without correct data', function(done) {
 	// 		controller.create(req,res, function() {
@@ -163,8 +258,8 @@ describe('CourseCommitteeEvaluationForm Contoller Unit Tests:', function() {
 	// 	});
 
 
-	// });
-	
+	});
+
 	// describe('CourseCommitteeEvaluationForm delete Tests', function() {
 	// 	it('should be able to delete a form that is already there', function(done) {
 	// 		controller.create(req,res, function() {

@@ -8,7 +8,6 @@ var mongoose = require('mongoose'),
 	CourseCommittee = mongoose.model('CourseCommitteeEvaluationForm'),
 	Handlebars = require('handlebars'),
 	phantom = require('phantom'),
-	wkhtmltopdf = require('wkhtmltopdf'),
 	fs = require('fs'),
 	_ = require('lodash');
 
@@ -16,6 +15,7 @@ var mongoose = require('mongoose'),
  * Store the JSON objects for the CourseCommitteeEvaluationForm
  */
 exports.create = function(req, res, next) {
+	// console.log('body: '+require('util').inspect(req.body));
 	var courseCommittee = new CourseCommittee(req.body);
 	courseCommittee.save(function(err) {
 		if (err) {
@@ -47,24 +47,12 @@ var generatePDF = function (html,id,req,res) {
       			ph.exit();
 				res.download(path, 'report.pdf', function(err) {
 					if(err) {
-						throw err;
+						console.log('Err' + err);
 					}
 				});
       		});  	
     	});
   	});
-
-	/*
-	var path = __dirname + '/pdfs/' + id + '.pdf';
-	wkhtmltopdf(html, {output: path, pageSize: 'A3'}, function(code, signal) {
-		res.download(path,'report.pdf',function(err) {
-			if(err) {
-				throw err;
-			}
-		});
-	});
-*/
-
 
 };
 
@@ -92,36 +80,36 @@ exports.read = function(req, res) {
 /**
  * Update a courseCommitteeEvaluationForm
  */
-exports.update = function(req, res) {
+exports.update = function(req, res, next) {
 	var courseCommittee = req.courseCommittee;
-
 	courseCommittee = _.extend(courseCommittee, req.body);
-
 	courseCommittee.save(function(err) {
 		if (err) {
-			return res.status(400).send({
+			res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
 			res.json(courseCommittee);
 		}
+		next();
 	});
 };
 
 /**
  * Delete a courseCommitteeEvaluationForm
  */
-exports.delete = function(req, res) {
+exports.delete = function(req, res, next) {
 	var courseCommittee = req.courseCommittee;
 
 	courseCommittee.remove(function(err) {
 		if (err) {
-			return res.status(400).send({
+			res.status(400).send({
 				message: errorHandler.getErrorMessage(err)
 			});
 		} else {
 			res.json(courseCommittee);
 		}
+		next();
 	});
 };
 
@@ -149,7 +137,6 @@ exports.list = function(req, res) {
  */
 exports.courseCommitteeEvaluationByID = function(req, res, next, id) {
 	CourseCommittee.findById(id).populate('courseOutcomeAssessmentForm').exec(function(err, courseCommittee) {
-		// console.log('console.log: '+id);
 		if (err) return next(err);
 		if (!courseCommittee) return next(new Error('Failed to load course committee ' + id));
 		req.courseCommittee = courseCommittee;

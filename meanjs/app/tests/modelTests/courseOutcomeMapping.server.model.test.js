@@ -198,11 +198,6 @@ describe('Course Outcome Mapping Unit Tests:', function(){
 			//var xls = json2xls(outcomes1); //testing actual course model JSON object defined way above
 			fs.writeFileSync('./data.xls', json2xls(parseFinalOutcome), 'binary');
 			//console.log(outcomes1);
-			console.log(parseFinalOutcome);
-
-
-
-
 			done();
 		});
 
