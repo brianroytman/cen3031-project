@@ -147,11 +147,21 @@ exports.list = function(req, res) {
  * CourseCommitteeEvaluationForm middleware used to 
  */
 exports.courseCommitteeEvaluationByID = function(req, res, next, id) {
-	CourseCommittee.findById(id).populate('courseOutcomeAssessmentForm').exec(function(err, courseCommittee) {
-		if (err) return next(err);
-		if (!courseCommittee) return next(new Error('Failed to load course committee ' + id));
-		req.courseCommittee = courseCommittee;
-		next();
+	CourseCommittee.findById(id)
+		.populate('courseOutcomeAssessmentForm')
+		.populate('outcomes')
+		.exec(function(err, values) {
+			var options = {
+				path: 'outcomes.outcomeEvaluation',
+				model: 'OutcomeEvaluation'
+			};
+			if (err) return next(err);
+			CourseCommittee.populate(values, options,function(err, courseCommittee) {
+				if (err) return next(err);
+				if (!courseCommittee) return next(new Error('Failed to load course committee ' + id));
+				req.courseCommittee = courseCommittee;
+				next();
+			});
 	});
 };
 

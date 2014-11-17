@@ -150,7 +150,11 @@ var CourseCommitteeEvaluationFormSchema = new Schema({
 	courseOutcomeAssessmentForm: { 
 		type: Schema.Types.ObjectId,
 		ref: 'CourseOutcomeAssessmentForm'
-	}
+	},
+	outcomes: [{
+		type: Schema.Types.ObjectId,
+		ref: 'Outcome'
+	}]
 	
 });
 
