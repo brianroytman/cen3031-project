@@ -6,6 +6,9 @@
 var should = require('should'),
 	mongoose = require('mongoose'),
 	CourseModel= mongoose.model('CourseOutcomeAssessmentForm'),
+	Outcome = mongoose.model('Outcome'),
+	OutcomeEvaluation = mongoose.model('OutcomeEvaluation'),
+	User = mongoose.model('User'),
 	CourseCommittee = mongoose.model('CourseCommitteeEvaluationForm'),
 	request = require('supertest');
 
@@ -13,7 +16,8 @@ var should = require('should'),
  * Globals, id later becomes the mongodb id of a document so that it can
  * be used in id specific routes.
  */
-var courseModel1, courseEvaluation, id, id2;
+var courseModel1, courseEvaluation, id, id2, outcome1, outcome2, outcome3, outcomeArray,
+	outcomeEvals1, outcomeEvals2, outcomeEvals3, user;
 
 /**
  * Functional tests.
@@ -24,6 +28,15 @@ var courseModel1, courseEvaluation, id, id2;
 describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 
 	before(function(done) {
+		user = new User({
+			firstName: 'Full',
+			lastName: 'Name',
+			displayName: 'Full Name',
+			email: 'test@test.com',
+			username: 'username',
+			password: 'password'
+		});
+		outcomeArray = [];
 		courseModel1 = new CourseModel({
 			description: 'First string describing the class...software engineering',
 			courseNumber: 1234,
@@ -40,32 +53,99 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 			averageLikertScaleValue: 4,
 			instructorComments: 'Room for instructor comments.'
 		});
-
-		courseModel1.save(function() {
-			courseEvaluation = new CourseCommittee({
-				courseCommitteeParticipants: 'Kyle Adam Zach Brian Brett',
-				description: 'This is a test',
-				syllabusReflectCurrentContent: false,
-				droppedTopics: true,
-				addedTopics: false,
-				textbookWorkingWell: false,
-				changesRequiredForNextAcademicYear: true,
-				newBooksToBeEvaluated: true,
-				bookMapWellToSyllabus: false,
-				otherEvaluationsIndicateIssues: true,
-				didStudentsMasterMaterial: false,
-				problemsWithKnowledgeInKeyConcepts: false,
-				prereqsStillAppropriate: true,
-				satisfyNeedsOfFollowupCourses: false,
-				sectionIActionsRecommendations: 'This is test for sectionI',
-				sectionIIActionsRecommendations: 'This is test for sectionII',
-				recommendationsForCourseImprovement: 'Drop the course',
-				recommendationsToCENProgramGovernance: 'Give me a raise',
-				sectionIIIRecommendationsComments: 'This is test for section III',
-				courseOutcomeAssessmentForm: courseModel1
-			});
-			done();
+		
+		
+		
+		outcomeEvals1 = new OutcomeEvaluation({
+			instrumentsChosen: 'satisfactory',
+			likertScaleThresholds: 'satisfactory',
+			sampleGradedStudentWork: 'satisfactory',
+			percentageOfStudentsAchievingOutcome: 'satisfactory',
+			averageLikertValue: 'satisfactory',
+			achievementOfOutcome: 'satisfactory',
+			suggestedImprovements: 'none'
 		});
+		outcomeEvals2 = new OutcomeEvaluation({
+			instrumentsChosen: 'unsatisfactory',
+			likertScaleThresholds: 'satisfactory',
+			sampleGradedStudentWork: 'unsatisfactory',
+			percentageOfStudentsAchievingOutcome: 'satisfactory',
+			averageLikertValue: 'unsatisfactory',
+			achievementOfOutcome: 'satisfactory',
+			suggestedImprovements: 'lots of stuff'
+		});
+		outcomeEvals3 = new OutcomeEvaluation({
+			instrumentsChosen: 'unsatisfactory',
+			likertScaleThresholds: 'unsatisfactory',
+			sampleGradedStudentWork: 'unsatisfactory',
+			percentageOfStudentsAchievingOutcome: 'unsatisfactory',
+			averageLikertValue: 'unsatisfactory',
+			achievementOfOutcome: 'unsatisfactory',
+			suggestedImprovements: 'ummmmmm'
+		});
+
+	user.save(function() {
+		courseModel1.save(function() {
+			outcomeEvals1.save(function() {
+				outcome1 = new Outcome({
+					outcomeID: 'HI',
+					outcomeName: 'OutcomeA',
+					outcomeEvaluation: outcomeEvals1,
+					user: user
+				});
+				outcome1.save(function() {
+					outcomeArray.push(outcome1);
+					outcomeEvals2.save(function() {
+						outcome2 = new Outcome({
+							outcomeID: 'BYE',
+							outcomeName: 'OutcomeB',
+							outcomeEvaluation: outcomeEvals2,
+							user: user
+						});
+						outcome2.save(function() {
+							outcomeArray.push(outcome2);
+							outcomeEvals3.save(function() {
+								outcome3 = new Outcome({
+									outcomeID: 'Maybe',
+									outcomeName: 'OutcomeC',
+									outcomeEvaluation: outcomeEvals3,
+									user: user
+								});
+								outcome3.save(function() {
+									outcomeArray.push(outcome3);
+									courseEvaluation = new CourseCommittee({
+										courseCommitteeParticipants: 'Kyle Adam Zach Brian Brett',
+										description: 'This is a test',
+										syllabusReflectCurrentContent: false,
+										droppedTopics: true,
+										addedTopics: false,
+										textbookWorkingWell: false,
+										changesRequiredForNextAcademicYear: true,
+										newBooksToBeEvaluated: true,
+										bookMapWellToSyllabus: false,
+										otherEvaluationsIndicateIssues: true,
+										didStudentsMasterMaterial: false,
+										problemsWithKnowledgeInKeyConcepts: false,
+										prereqsStillAppropriate: true,
+										satisfyNeedsOfFollowupCourses: false,
+										sectionIActionsRecommendations: 'This is test for sectionI',
+										sectionIIActionsRecommendations: 'This is test for sectionII',
+										recommendationsForCourseImprovement: 'Drop the course',
+										recommendationsToCENProgramGovernance: 'Give me a raise',
+										sectionIIIRecommendationsComments: 'This is test for section III',
+										courseOutcomeAssessmentForm: courseModel1,
+										outcomes: outcomeArray
+									});
+
+									done();
+								});
+							});
+						});
+					});
+				});
+			});
+		}); 
+	});
 
 	});
 
@@ -158,6 +238,7 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 	});
 	
 	after(function(done) {
+		Outcome.remove().exec();
 		CourseModel.remove().exec();
 		CourseCommittee.remove().exec();
 		done();
