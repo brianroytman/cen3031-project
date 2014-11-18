@@ -29,6 +29,10 @@ var OutcomeSchema = new Schema({
 		type: Schema.ObjectId,
 		ref: 'User'
 	},
+	outcomeAssessmentForm: {
+		type: Schema.ObjectId,
+		ref: 'CourseOutcomeAssessmentForm'
+	},
 	outcomeEvaluation: {
 		type: Schema.ObjectId,
 		ref: 'OutcomeEvaluation'
