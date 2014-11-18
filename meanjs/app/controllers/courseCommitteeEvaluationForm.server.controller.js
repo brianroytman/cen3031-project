@@ -82,8 +82,11 @@ var generateHTML = function(courseCommittee,filename,req,res) {
  * Creates a pdf form based of the specified courseCommitteeEvaluationForm
  */
 exports.read = function(req, res) {
+	res.json(req.courseCommittee);
+	/*
 	var filename = __dirname + '/pdfModels/CourseCommitteeEvaluationForm.html';
 	generateHTML(req.courseCommittee,filename,req,res);
+	*/
 };
 
 
@@ -144,25 +147,16 @@ exports.list = function(req, res) {
 };
 
 /**
- * CourseCommitteeEvaluationForm middleware used to 
+ * CourseCommitteeEvaluationForm middleware used to retrieve the evaluationForm from the database 
  */
 exports.courseCommitteeEvaluationByID = function(req, res, next, id) {
-	CourseCommittee.findById(id)
-		.populate('courseOutcomeAssessmentForm')
-		.populate('outcomes')
-		.exec(function(err, values) {
-			var options = {
-				path: 'outcomes.outcomeEvaluation',
-				model: 'OutcomeEvaluation'
-			};
-			if (err) return next(err);
-			CourseCommittee.populate(values, options,function(err, courseCommittee) {
-				if (err) return next(err);
-				if (!courseCommittee) return next(new Error('Failed to load course committee ' + id));
-				req.courseCommittee = courseCommittee;
-				next();
-			});
+	CourseCommittee.findById(id).exec(function(err, courseCommittee) { 
+		if (err) return next(err);
+		if (!courseCommittee) return next(new Error('Failed to load course committee ' + id));
+		req.courseCommittee = courseCommittee;
+		next();
 	});
+	
 };
 
 /**

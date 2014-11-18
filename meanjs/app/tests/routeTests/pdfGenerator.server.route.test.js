@@ -6,10 +6,13 @@
 var should = require('should'),
 	mongoose = require('mongoose'),
 	CourseModel= mongoose.model('CourseOutcomeAssessmentForm'),
+	Course = mongoose.model('Course'),
 	Outcome = mongoose.model('Outcome'),
 	OutcomeEvaluation = mongoose.model('OutcomeEvaluation'),
 	User = mongoose.model('User'),
 	CourseCommittee = mongoose.model('CourseCommitteeEvaluationForm'),
+	fs = require('fs'),
+	Handlebars = require('handlebars'),
 	request = require('supertest');
 
 /**
@@ -17,7 +20,7 @@ var should = require('should'),
  * be used in id specific routes.
  */
 var courseModel1, courseEvaluation, id, id2, outcome1, outcome2, outcome3, outcomeArray,
-	outcomeEvals1, outcomeEvals2, outcomeEvals3, user;
+	outcomeEvals1, outcomeEvals2, outcomeEvals3, user, course;
 
 /**
  * Functional tests.
@@ -25,10 +28,10 @@ var courseModel1, courseEvaluation, id, id2, outcome1, outcome2, outcome3, outco
  * that should throw an error. Like passing in a garbage id causes an error to be thrown.
  * Or passing in a garbage course causes an error. Stuff like that. Will be similar in the controller.
  */
-describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
+describe('PDFGenerator Route Functional Tests:', function() {
 
 	before(function(done) {
-		/*
+		
 		user = new User({
 			firstName: 'Full',
 			lastName: 'Name',
@@ -37,6 +40,7 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 			username: 'username',
 			password: 'password'
 		});
+
 		outcomeArray = [];
 		courseModel1 = new CourseModel({
 			description: 'First string describing the class...software engineering',
@@ -55,7 +59,28 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 			instructorComments: 'Room for instructor comments.'
 		});
 		
-		
+		courseEvaluation = new CourseCommittee({
+			courseCommitteeParticipants: 'Kyle Adam Zach Brian Brett',
+			description: 'This is a test',
+			syllabusReflectCurrentContent: false,
+			droppedTopics: true,
+			addedTopics: false,
+			textbookWorkingWell: false,
+			changesRequiredForNextAcademicYear: true,
+			newBooksToBeEvaluated: true,
+			bookMapWellToSyllabus: false,
+			otherEvaluationsIndicateIssues: true,
+			didStudentsMasterMaterial: false,
+			problemsWithKnowledgeInKeyConcepts: false,
+			prereqsStillAppropriate: true,
+			satisfyNeedsOfFollowupCourses: false,
+			sectionIActionsRecommendations: 'This is test for sectionI',
+			sectionIIActionsRecommendations: 'This is test for sectionII',
+			recommendationsForCourseImprovement: 'Drop the course',
+			recommendationsToCENProgramGovernance: 'Give me a raise',
+			sectionIIIRecommendationsComments: 'This is test for section III',
+		});
+
 		
 		outcomeEvals1 = new OutcomeEvaluation({
 			instrumentsChosen: 'satisfactory',
@@ -85,62 +110,48 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 			suggestedImprovements: 'ummmmmm'
 		});
 
-	user.save(function() {
-		courseModel1.save(function() {
-			outcomeEvals1.save(function() {
-				outcome1 = new Outcome({
-					outcomeID: 'HI',
-					outcomeName: 'OutcomeA',
+		user.save(function() {
+			courseModel1.save(function() {
+				outcomeEvals1.save(function() {
+					outcome1 = new Outcome({
+						outcomeID: 'a',
+					outcomeName: 'Something',
 					outcomeEvaluation: outcomeEvals1,
+					outcomeAssessmentForm: courseModel1,
 					user: user
 				});
 				outcome1.save(function() {
 					outcomeArray.push(outcome1);
 					outcomeEvals2.save(function() {
 						outcome2 = new Outcome({
-							outcomeID: 'BYE',
-							outcomeName: 'OutcomeB',
+							outcomeID: 'b',
+							outcomeName: 'aksjdf',
 							outcomeEvaluation: outcomeEvals2,
+							outcomeAssessmentForm: courseModel1,
 							user: user
 						});
 						outcome2.save(function() {
 							outcomeArray.push(outcome2);
 							outcomeEvals3.save(function() {
 								outcome3 = new Outcome({
-									outcomeID: 'Maybe',
-									outcomeName: 'OutcomeC',
+									outcomeID: 'g',
+									outcomeName: 'fasdfad',
 									outcomeEvaluation: outcomeEvals3,
+									outcomeAssessmentForm: courseModel1,
 									user: user
 								});
 								outcome3.save(function() {
 									outcomeArray.push(outcome3);
-									*/
-									courseEvaluation = new CourseCommittee({
-										courseCommitteeParticipants: 'Kyle Adam Zach Brian Brett',
-										description: 'This is a test',
-										syllabusReflectCurrentContent: false,
-										droppedTopics: true,
-										addedTopics: false,
-										textbookWorkingWell: false,
-										changesRequiredForNextAcademicYear: true,
-										newBooksToBeEvaluated: true,
-										bookMapWellToSyllabus: false,
-										otherEvaluationsIndicateIssues: true,
-										didStudentsMasterMaterial: false,
-										problemsWithKnowledgeInKeyConcepts: false,
-										prereqsStillAppropriate: true,
-										satisfyNeedsOfFollowupCourses: false,
-										sectionIActionsRecommendations: 'This is test for sectionI',
-										sectionIIActionsRecommendations: 'This is test for sectionII',
-										recommendationsForCourseImprovement: 'Drop the course',
-										recommendationsToCENProgramGovernance: 'Give me a raise',
-										sectionIIIRecommendationsComments: 'This is test for section III',
-										courseOutcomeAssessmentForm: courseModel1,
-										outcomes: outcomeArray
+									course = new Course({
+										courseID: '3101',
+										courseName: 'Intro to Software',
+										outcomes: outcomeArray,
+										courseCommitteeEvaluationForm: courseEvaluation
 									});
-
-									done();
-									/*
+									course.save(function() {
+										id = course._id;
+										done();
+									});
 								});
 							});
 						});
@@ -149,9 +160,10 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 			});
 		});
 	});
-*/
+
 
 	});
+
 
 	describe('/courseCommitteeEvaluation tests', function() {
 		//3001 because thats the port that runs when grunt test is called.
@@ -159,52 +171,45 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 		//Request is used to mock the front end calls.
 		request = request(url);
 
-		it('should save a new CourseCommitteeEvaluationForm', function(done) {
-			request
-				.post('/courseCommitteeEvaluation')
-				.send(courseEvaluation)
-      			.end(function (err,res) {
-      				res.status.should.equal(200);
-      				var courseEvaluationResponse = res.body;
-      				CourseCommittee.findOne({courseCommitteeParticipants : 'Kyle Adam Zach Brian Brett'}, function (err, courses) {
-						id2 = courses._id;
-						courses.description.should.equal(courseEvaluation.description);
-						done();
-					});
-			});
-		});
-
-		it('should return the newly created CourseCommitteeEvaluationForm', function(done) {
-			request
-				.get('/courseCommitteeEvaluation')
-      			.end(function (err,res) {
-      				res.status.should.equal(200);
-      				var courseResponse = res.body;
-      				courseResponse.length.should.equal(1);
-      				courseResponse[0].courseCommitteeParticipants.should.equal(courseEvaluation.courseCommitteeParticipants);
-      				courseResponse[0].sectionIActionsRecommendations.should.equal(courseEvaluation.sectionIActionsRecommendations);
-      				done();
-      			});
-		});
 		
-	});
 
-	describe('/courseCommitteeEvaluation/:id tests', function() {
-
+	describe('/committeePDF/:id tests', function() {
 		//This test is weird. Can't really verify the pdf is created. 
 		//Go to the /controllers/pdfs folder and verify that it has been created.
 		//Manually delete all the generated pdfs. 
-/*
 		it('should create a pdf form based on the courseEvaluation', function(done) {
 			request
-				.get('/courseCommitteeEvaluation/' + id2)
+				.get('/committeePDF/' + id)
 				.end(function (err,res) {
 					res.status.should.equal(200);
 					done();
 				});
+
 		});
-*/
-		
+	});
+
+	describe('/outcomePDF tests', function() {
+
+		it('should create a pdf form based on the courseOutcomeAssessmentForm', function(done) {
+			var fileName = __dirname + '/../../controllers/pdfModels/CourseOutcomeAssessmentForm.html';
+			fs.readFile(fileName, function(err,data) {
+				var template = Handlebars.compile(data.toString());
+				var result = template(courseModel1);
+				request
+				.get('/outcomePDF')
+				.send({data: result, _id:1234123412341235})
+				.end(function (err,res) {
+					res.status.should.equal(200);
+					done();
+				});
+			});
+			
+		});
+
+
+	});
+
+	/*	
 		//This test will need to be updated if we fix thte sorting of the get operation
 		it('should successfully update a form', function(done) {
 			courseEvaluation.description = 'I am newly updated.';
@@ -239,9 +244,10 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 						});
 				});
 		});
-
+*/
 	});
 
+	
 	after(function(done) {
 		CourseCommittee.remove().exec();
 		done();

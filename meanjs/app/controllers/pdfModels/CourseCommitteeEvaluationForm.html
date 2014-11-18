@@ -373,11 +373,10 @@ td
 				    	<h4 style="text-align:left">Outcome: </h4>
 				    	<h4 style="text-align:left">({{this.outcomeID}}) {{this.outcomeName}}</h4>
 				    	<br/>
-				    	<h5 style="text-align:left"> Number of students: {{courseOutcomeAssessmentForm.numberOfStudents}} </h5>
+				    	<h5 style="text-align:left"> Number of students: {{this.courseOutcomeAssessmentForm.numberOfStudents}} </h5>
 				    </td>
 				    <td>
-				    	<h4>Evaluation: <br/><br/></h4>
-				    	<p class="bold" style="text-align:center">(satisfactory, unsatisfactory, weaknesses, identified, suggestedimprovements, remarks) </p>
+				    	<h4>Evaluation:(satisfactory, unsatisfactory, weaknesses, identified, suggestedimprovements, remarks) </h4>
 				    </td>
 				  </tr>
 				  
@@ -400,21 +399,19 @@ td
 				  <tr>
 				    <td>3. Sample Graded Student Work</td> 
 				    <td style="text-align:center">
-				    	{{this.outcomeEvaluation.sampleGradedStudentWork}}
-				    	
+				    	{{this.outcomeEvaluation.sampleGradedStudentWork}}	
 				    </td>
 				  </tr>
 
 				  <tr>
-				    <td>4. Percentage of Students Achieving Outcome</td>
+				    <td>4. Percentage of Students Achieving Outcome {{this.courseOutcomeAssessmentForm.percentOfStudentsAchievingOutcomeAdequately}}</td>
 				    <td style="text-align:center">
 				    	{{this.outcomeEvaluation.percentageOfStudentsAchievingOutcome}}
-				    	
 				    </td>
 				  </tr>
 
 				  <tr>
-				    <td>5. Average Likert Value</td>
+				    <td>5. Average Likert Value {{this.courseOutcomeAssessmentForm.averageLikertScaleValue}}</td>
 				    <td style="text-align:center">
 				    	 {{this.outcomeEvaluation.averageLikertValue}}
 				    	
@@ -440,6 +437,7 @@ td
 
 			</table> 
 			<br/><br/><br/><br/><br/>
+			{{this.courseOutcomeAssessmentForm.descriptionOfInstrument}}
 		{{/each}}
 		</div>
 		<div class="section right">

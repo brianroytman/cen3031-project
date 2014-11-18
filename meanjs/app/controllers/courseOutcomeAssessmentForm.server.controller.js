@@ -37,26 +37,6 @@ exports.create = function(req, res, next) {
  * Might have to change it so that is returns the url instead of the actual file.
  */
 var generatePDF = function (html,id,req,res) {
-	/*
-	phantom.create(function (ph) {
-  		ph.createPage(function (page) {
-     		page.setContent(html);
-     		page.set('paperSize', { format: 'A4'});
-     		var path = __dirname + '/pdfs/' + id + '.pdf';
-      		page.render(path, function() {
-      			ph.exit();
-				res.download(path, 'report.pdf', function(err) {
-					if(err) {
-						res.status(400).send({
-							message: errorHandler.getErrorMessage(err)
-						});
-					}
-				});
-      		});  	
-    	});
-  	});
-*/
-
   	var path = __dirname + '/pdfs/' + id + '.pdf';
   	wkhtmltopdf(html, { pageSize: 'A4', output: path },  function() {
   		res.download(path, 'report.pdf', function(err) {
@@ -65,7 +45,6 @@ var generatePDF = function (html,id,req,res) {
 					}
 		});
   	});
-
 };
 
 /**
@@ -89,8 +68,11 @@ var generateHTML = function(course,filename,req,res,next) {
  * Creates a pdf form based of the specified courseOutcomeEvaluationForm
  */
 exports.read = function(req, res) {
+	res.json(req.course);
+	/*
 	var filename = __dirname + '/pdfModels/CourseOutcomeAssessmentForm.html';
 	generateHTML(req.course,filename,req,res);
+	*/
 };
 
 
@@ -157,6 +139,24 @@ exports.courseOutcomeAssessmentByID = function(req, res, next, id) {
 		req.course = course;
 		next();
 	});
+	/*
+	Course.findById(id)
+		.populate('outcomes')
+		.exec(function(err, values) {
+			if (err) return next(err);
+			var options = {
+				path: 'outcomes.courseOutcomeAssessmentForm',
+				model: 'CourseOutcomeAssessmentForm'
+			};
+			CourseCommittee.populate(values, options,function(err, values2) {
+				if (err) return next(err);
+				if (!course) return next(new Error('Failed to load course ' + id));
+				req.course = course;
+				next();
+			});
+		});
+
+	*/
 };
 
 /**
