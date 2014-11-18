@@ -33,60 +33,10 @@ exports.create = function(req, res, next) {
 
 
 /**
- * Uses phantomjs to render the provided html into a pdf.
- * 'paperSize' sets the size of the pdf generated to be what is normal looking
- * res.download(..) returns the specified file to the front end for downloading
- * Might have to change it so that is returns the url instead of the actual file.
- */
-var generatePDF = function (html,id,req,res) {
-	/*
-	phantom.create(function (ph) {
-  		ph.createPage(function (page) {
-     		page.setContent(html);
-     		page.set('paperSize', { format: 'A4'});
-     		var path = __dirname + '/pdfs/' + id + '.pdf';
-      		page.render(path, function() {
-      			ph.exit();
-				res.download(path, 'report.pdf', function(err) {
-					if(err) {
-						console.log('Err' + err);
-					}
-				});
-      		});  	
-    	});
-  	});
-*/
-  	var path = __dirname + '/pdfs/' + id + '.pdf';
-  	wkhtmltopdf(html, { pageSize: 'A3', output: path },  function() {
-  		res.download(path, 'report.pdf', function(err) {
-					if(err) {
-						throw err;
-					}
-		});
-  	});
-
-};
-
-/**
- * Uses Handlebarsjs to dynamically populate a html template with a json object.
- */ 
-var generateHTML = function(courseCommittee,filename,req,res) {
-	fs.readFile(filename, function(err,data) {
-		var template = Handlebars.compile(data.toString());
-		var result = template(courseCommittee);
-		generatePDF(result,courseCommittee._id,req,res);
-	});
-};
-
-/**
  * Creates a pdf form based of the specified courseCommitteeEvaluationForm
  */
 exports.read = function(req, res) {
 	res.json(req.courseCommittee);
-	/*
-	var filename = __dirname + '/pdfModels/CourseCommitteeEvaluationForm.html';
-	generateHTML(req.courseCommittee,filename,req,res);
-	*/
 };
 
 

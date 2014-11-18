@@ -130,30 +130,6 @@ describe('CourseOutcomeAssessmentForm Route Functional Tests:', function() {
 	});
 
 	describe('/courseOutcomeAssessment/:id tests', function() {
-
-		//This test is weird. Can't really verify the pdf is created. 
-		//Go to the /controllers/pdfs folder and verify that it has been created.
-		//Manually delete all the generated pdfs. 
-		/*
-
-		it('should create a pdf form based on the first course', function(done) {
-			request
-				.get('/courseOutcomeAssessment/' + id2)
-				.end(function (err,res) {
-					res.status.should.equal(200);
-					done();
-				});
-		});
-		
-		it('should create a pdf form based on the second course', function(done) {
-			request
-				.get('/courseOutcomeAssessment/' + id)
-				.end(function (err,res) {
-					res.status.should.equal(200);
-					done();
-				});
-		});
-	*/
 	
 		//This test will need to be updated if we fix thte sorting of the get operation
 		it('should successfully update a form', function(done) {

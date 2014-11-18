@@ -28,129 +28,29 @@ var courseModel1, courseEvaluation, id, id2, outcome1, outcome2, outcome3, outco
 describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 
 	before(function(done) {
-		/*
-		user = new User({
-			firstName: 'Full',
-			lastName: 'Name',
-			displayName: 'Full Name',
-			email: 'test@test.com',
-			username: 'username',
-			password: 'password'
-		});
-		outcomeArray = [];
-		courseModel1 = new CourseModel({
-			description: 'First string describing the class...software engineering',
-			courseNumber: 1234,
-			term: 'Fall 2014',
-			courseTitle: 'CEN3031',
-			instructor: 'Professor Dobra',
-			date: new Date(), // Is this proper syntax for
-			descriptionOfInstrument: 'String describing instrument..whatever this means',
-			numberOfStudents: 45,
-			gradingScale: '0-10',
-			averageScore: 82,
-			scoreForAdequateOutcomeAchievement: 70,
-			percentOfStudentsAchievingOutcomeAdequately: 95,
-			averageLikertScaleValue: 4,
-			instructorComments: 'Room for instructor comments.'
-		});
-		
-		
-		
-		outcomeEvals1 = new OutcomeEvaluation({
-			instrumentsChosen: 'satisfactory',
-			likertScaleThresholds: 'satisfactory',
-			sampleGradedStudentWork: 'satisfactory',
-			percentageOfStudentsAchievingOutcome: 'satisfactory',
-			averageLikertValue: 'satisfactory',
-			achievementOfOutcome: 'satisfactory',
-			suggestedImprovements: 'none'
-		});
-		outcomeEvals2 = new OutcomeEvaluation({
-			instrumentsChosen: 'unsatisfactory',
-			likertScaleThresholds: 'satisfactory',
-			sampleGradedStudentWork: 'unsatisfactory',
-			percentageOfStudentsAchievingOutcome: 'satisfactory',
-			averageLikertValue: 'unsatisfactory',
-			achievementOfOutcome: 'satisfactory',
-			suggestedImprovements: 'lots of stuff'
-		});
-		outcomeEvals3 = new OutcomeEvaluation({
-			instrumentsChosen: 'unsatisfactory',
-			likertScaleThresholds: 'unsatisfactory',
-			sampleGradedStudentWork: 'unsatisfactory',
-			percentageOfStudentsAchievingOutcome: 'unsatisfactory',
-			averageLikertValue: 'unsatisfactory',
-			achievementOfOutcome: 'unsatisfactory',
-			suggestedImprovements: 'ummmmmm'
-		});
-
-	user.save(function() {
-		courseModel1.save(function() {
-			outcomeEvals1.save(function() {
-				outcome1 = new Outcome({
-					outcomeID: 'HI',
-					outcomeName: 'OutcomeA',
-					outcomeEvaluation: outcomeEvals1,
-					user: user
-				});
-				outcome1.save(function() {
-					outcomeArray.push(outcome1);
-					outcomeEvals2.save(function() {
-						outcome2 = new Outcome({
-							outcomeID: 'BYE',
-							outcomeName: 'OutcomeB',
-							outcomeEvaluation: outcomeEvals2,
-							user: user
-						});
-						outcome2.save(function() {
-							outcomeArray.push(outcome2);
-							outcomeEvals3.save(function() {
-								outcome3 = new Outcome({
-									outcomeID: 'Maybe',
-									outcomeName: 'OutcomeC',
-									outcomeEvaluation: outcomeEvals3,
-									user: user
-								});
-								outcome3.save(function() {
-									outcomeArray.push(outcome3);
-									*/
-									courseEvaluation = new CourseCommittee({
-										courseCommitteeParticipants: 'Kyle Adam Zach Brian Brett',
-										description: 'This is a test',
-										syllabusReflectCurrentContent: false,
-										droppedTopics: true,
-										addedTopics: false,
-										textbookWorkingWell: false,
-										changesRequiredForNextAcademicYear: true,
-										newBooksToBeEvaluated: true,
-										bookMapWellToSyllabus: false,
-										otherEvaluationsIndicateIssues: true,
-										didStudentsMasterMaterial: false,
-										problemsWithKnowledgeInKeyConcepts: false,
-										prereqsStillAppropriate: true,
-										satisfyNeedsOfFollowupCourses: false,
-										sectionIActionsRecommendations: 'This is test for sectionI',
-										sectionIIActionsRecommendations: 'This is test for sectionII',
-										recommendationsForCourseImprovement: 'Drop the course',
-										recommendationsToCENProgramGovernance: 'Give me a raise',
-										sectionIIIRecommendationsComments: 'This is test for section III',
-										courseOutcomeAssessmentForm: courseModel1,
-										outcomes: outcomeArray
-									});
-
-									done();
-									/*
-								});
-							});
-						});
-					});
-				});
+		courseEvaluation = new CourseCommittee({
+			courseCommitteeParticipants: 'Kyle Adam Zach Brian Brett',
+			description: 'This is a test',
+			syllabusReflectCurrentContent: false,
+			droppedTopics: true,
+			addedTopics: false,
+			textbookWorkingWell: false,
+			changesRequiredForNextAcademicYear: true,
+			newBooksToBeEvaluated: true,
+			bookMapWellToSyllabus: false,
+			otherEvaluationsIndicateIssues: true,
+			didStudentsMasterMaterial: false,
+			problemsWithKnowledgeInKeyConcepts: false,
+			prereqsStillAppropriate: true,
+			satisfyNeedsOfFollowupCourses: false,
+			sectionIActionsRecommendations: 'This is test for sectionI',
+			sectionIIActionsRecommendations: 'This is test for sectionII',
+			recommendationsForCourseImprovement: 'Drop the course',
+			recommendationsToCENProgramGovernance: 'Give me a raise',
+			sectionIIIRecommendationsComments: 'This is test for section III',
+			courseOutcomeAssessmentForm: courseModel1,
 			});
-		});
-	});
-*/
-
+			done();
 	});
 
 	describe('/courseCommitteeEvaluation tests', function() {
@@ -190,20 +90,6 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 	});
 
 	describe('/courseCommitteeEvaluation/:id tests', function() {
-
-		//This test is weird. Can't really verify the pdf is created. 
-		//Go to the /controllers/pdfs folder and verify that it has been created.
-		//Manually delete all the generated pdfs. 
-/*
-		it('should create a pdf form based on the courseEvaluation', function(done) {
-			request
-				.get('/courseCommitteeEvaluation/' + id2)
-				.end(function (err,res) {
-					res.status.should.equal(200);
-					done();
-				});
-		});
-*/
 		
 		//This test will need to be updated if we fix thte sorting of the get operation
 		it('should successfully update a form', function(done) {

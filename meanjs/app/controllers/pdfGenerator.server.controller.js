@@ -14,7 +14,7 @@ var mongoose = require('mongoose'),
 
 exports.generatePDF = function (req,res) {
   	var path = __dirname + '/pdfs/' + req.body._id + '.pdf';
-  	wkhtmltopdf(req.body.data, { pageSize: 'A4', output: path },  function() {
+  	wkhtmltopdf(req.body.data, { pageSize: 'A3', output: path },  function() {
   		res.download(path, 'report.pdf', function(err) {
 			if(err) {
 				throw err;
@@ -57,7 +57,7 @@ exports.courseByID = function(req, res, next, id) {
 			Course.populate(values, options,function(err, values2) {
 				if (err) return next(err);
 				options = { 
-					path: 'outcomes.courseOutcomeAssessmentForm',
+					path: 'outcomes.outcomeAssessmentForm',
 					model: 'CourseOutcomeAssessmentForm'
 				};
 				Course.populate(values, options,function(err, courseCommittee) {

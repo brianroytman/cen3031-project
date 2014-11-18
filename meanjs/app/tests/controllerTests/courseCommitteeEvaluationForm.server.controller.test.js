@@ -101,13 +101,6 @@ describe('CourseCommitteeEvaluationForm Contoller Unit Tests:', function() {
 				data.prereqsStillAppropriate.should.equal(courseEvaluation.prereqsStillAppropriate);
 				code.should.equal(200);
 				done();
-				/*
-				CourseModel.findById(courseEvaluation.courseOutcomeAssessmentForm).exec(function(err, course) {
-					course.courseNumber.should.equal(courseModel1.courseNumber);
-					code.should.equal(200);
-					done();
-				});
-				*/
 			});
 		});
 
@@ -195,11 +188,6 @@ describe('CourseCommitteeEvaluationForm Contoller Unit Tests:', function() {
 				var data = JSON.parse(res._getData());
 				var id = data._id;
 				data.prereqsStillAppropriate.should.equal(courseEvaluation.prereqsStillAppropriate);
-				/*
-				CourseModel.findById(courseEvaluation.courseOutcomeAssessmentForm).exec(function(err, course) {
-					course.courseNumber.should.equal(courseModel1.courseNumber);
-					code.should.equal(200);
-				*/
 					CourseCommittee.findById(id).exec(function(err, courseComittee1) {
 	 					req.courseCommittee = courseComittee1;
 	 					req.body = {courseCommitteeParticipants : 'test course committee'};
@@ -211,7 +199,6 @@ describe('CourseCommitteeEvaluationForm Contoller Unit Tests:', function() {
 	 						done();
 	 					});
 	 				});
-				//});
 			});
 		});
 /*

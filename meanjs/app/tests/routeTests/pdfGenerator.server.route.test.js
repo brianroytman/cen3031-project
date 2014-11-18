@@ -111,6 +111,7 @@ describe('PDFGenerator Route Functional Tests:', function() {
 		});
 
 		user.save(function() {
+
 			courseModel1.save(function() {
 				outcomeEvals1.save(function() {
 					outcome1 = new Outcome({
@@ -120,41 +121,43 @@ describe('PDFGenerator Route Functional Tests:', function() {
 					outcomeAssessmentForm: courseModel1,
 					user: user
 				});
-				outcome1.save(function() {
-					outcomeArray.push(outcome1);
-					outcomeEvals2.save(function() {
-						outcome2 = new Outcome({
-							outcomeID: 'b',
-							outcomeName: 'aksjdf',
-							outcomeEvaluation: outcomeEvals2,
-							outcomeAssessmentForm: courseModel1,
-							user: user
-						});
-						outcome2.save(function() {
-							outcomeArray.push(outcome2);
-							outcomeEvals3.save(function() {
-								outcome3 = new Outcome({
-									outcomeID: 'g',
-									outcomeName: 'fasdfad',
-									outcomeEvaluation: outcomeEvals3,
-									outcomeAssessmentForm: courseModel1,
-									user: user
-								});
-								outcome3.save(function() {
-									outcomeArray.push(outcome3);
-									course = new Course({
-										courseID: '3101',
-										courseName: 'Intro to Software',
-										outcomes: outcomeArray,
-										courseCommitteeEvaluationForm: courseEvaluation
+					courseEvaluation.save(function() {
+					outcome1.save(function() {
+						outcomeArray.push(outcome1);
+						outcomeEvals2.save(function() {
+							outcome2 = new Outcome({
+								outcomeID: 'b',
+								outcomeName: 'aksjdf',
+								outcomeEvaluation: outcomeEvals2,
+								outcomeAssessmentForm: courseModel1,
+								user: user
+							});
+							outcome2.save(function() {
+								outcomeArray.push(outcome2);
+								outcomeEvals3.save(function() {
+									outcome3 = new Outcome({
+										outcomeID: 'g',
+										outcomeName: 'fasdfad',
+										outcomeEvaluation: outcomeEvals3,
+										outcomeAssessmentForm: courseModel1,
+										user: user
 									});
-									course.save(function() {
-										id = course._id;
-										done();
+									outcome3.save(function() {
+										outcomeArray.push(outcome3);
+										course = new Course({
+											courseID: '3101',
+											courseName: 'Intro to Software',
+											outcomes: outcomeArray,
+											courseCommitteeEvaluationForm: courseEvaluation
+										});
+										course.save(function() {
+											id = course._id;
+											done();
+										});
 									});
 								});
 							});
-						});
+					});
 					});
 				});
 			});

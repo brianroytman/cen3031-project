@@ -30,49 +30,12 @@ exports.create = function(req, res, next) {
 	
 };
 
-/**
- * Uses phantomjs to render the provided html into a pdf.
- * 'paperSize' sets the size of the pdf generated to be what is normal looking
- * res.download(..) returns the specified file to the front end for downloading
- * Might have to change it so that is returns the url instead of the actual file.
- */
-var generatePDF = function (html,id,req,res) {
-  	var path = __dirname + '/pdfs/' + id + '.pdf';
-  	wkhtmltopdf(html, { pageSize: 'A4', output: path },  function() {
-  		res.download(path, 'report.pdf', function(err) {
-					if(err) {
-						throw err;
-					}
-		});
-  	});
-};
-
-/**
- * Uses Handlebarsjs to dynamically populate a html template with a json object.
- * TODO fix this so the date appears without the time in it.
- */ 
-var generateHTML = function(course,filename,req,res,next) {
-	fs.readFile(filename, function(err,data) {
-		var template = Handlebars.compile(data.toString());
-		var result = template(course);
-		//generate the pdf
-		if(next) {
-			next();
-		} else {
-			generatePDF(result, course._id,req,res);
-		}
-	});
-};
 
 /**
  * Creates a pdf form based of the specified courseOutcomeEvaluationForm
  */
 exports.read = function(req, res) {
 	res.json(req.course);
-	/*
-	var filename = __dirname + '/pdfModels/CourseOutcomeAssessmentForm.html';
-	generateHTML(req.course,filename,req,res);
-	*/
 };
 
 

@@ -142,12 +142,12 @@ td
 	<div class="section group">		
 		<div class="col span_1_of_1">
 			<ul>
-				<li>Course Number and Title: {{ courseOutcomeAssessmentForm.courseNumber }} , {{ courseOutcomeAssessmentForm.courseTitle}} </li>
-				<li>Term and Year: {{ courseOutcomeAssessmentForm.term }}</li>
-				<li>Instructor: {{ courseOutcomeAssessmentForm.instructor }}</li>
-				<li>Course Committee Participants: {{ courseCommitteeParticipants }}</li>
+				<li>Course Number and Title: {{ outcomes.[0].outcomeAssessmentForm.courseNumber }} , {{ outcomes.0.outcomeAssessmentForm.courseTitle}} </li>
+				<li>Term and Year: {{  outcomes.[0].outcomeAssessmentForm.term }}</li>
+				<li>Instructor: {{  outcomes.[0].outcomeAssessmentForm.instructor }}</li>
+				<li>Course Committee Participants: {{ courseCommitteeEvaluationForm.courseCommitteeParticipants }}</li>
 				<br>
-				<li>Date: {{ date }}</li>
+				<li>Date: {{ courseCommitteeEvaluationForm.date }}</li>
 			</ul>
 		</div>
 	</div>
@@ -165,8 +165,8 @@ td
 						<li>Syllabus: Does the syllabus reflect current content? </li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" {{#if syllabusReflectCurrentContent }} checked {{/if}}><label>YES</label>
-						<input type="checkbox" {{#unless syllabusReflectCurrentContent }} checked {{/unless}}><label>NO</label>
+						<input type="checkbox" {{#if courseCommitteeEvaluationForm.syllabusReflectCurrentContent }} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless courseCommitteeEvaluationForm.syllabusReflectCurrentContent }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 						
@@ -175,8 +175,8 @@ td
 						<li>Are there topics that should be dropped from the course? </li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" {{#if droppedTopics}} checked {{/if}}><label>YES</label>
-						<input type="checkbox" {{#unless droppedTopics }} checked {{/unless}}><label>NO</label>
+						<input type="checkbox" {{#if courseCommitteeEvaluationForm.droppedTopics}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless courseCommitteeEvaluationForm.droppedTopics }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 
@@ -185,8 +185,8 @@ td
 						<li>Are there topics that should be added to the course? </li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" {{#if addedTopics}} checked {{/if}}><label>YES</label>
-						<input type="checkbox" {{#unless addedTopics }} checked {{/unless}}><label>NO</label>
+						<input type="checkbox" {{#if courseCommitteeEvaluationForm.addedTopics}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless courseCommitteeEvaluationForm.addedTopics }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 				<br/>
@@ -195,8 +195,8 @@ td
 						<li>Textbook: Is the textbook working well?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" {{#if textbookWorkingWell}} checked {{/if}}><label>YES</label>
-						<input type="checkbox" {{#unless textbookWorkingWell }} checked {{/unless}} ><label>NO</label>
+						<input type="checkbox" {{#if courseCommitteeEvaluationForm.textbookWorkingWell}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless courseCommitteeEvaluationForm.textbookWorkingWell }} checked {{/unless}} ><label>NO</label>
 					</div>
 				</div>
 
@@ -205,8 +205,8 @@ td
 						<li>Should changes be considered for the next academic year?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" {{#if changesRequiredForNextAcademicYear}} checked {{/if}}><label>YES</label>
-						<input type="checkbox" {{#unless changesRequiredForNextAcademicYear }} checked {{/unless}}><label>NO</label>
+						<input type="checkbox" {{#if courseCommitteeEvaluationForm.changesRequiredForNextAcademicYear}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless courseCommitteeEvaluationForm.changesRequiredForNextAcademicYear }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 
@@ -215,8 +215,8 @@ td
 						<li>Are there new books available that should be evaluated?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" {{#if newBooksToBeEvaluated}} checked {{/if}}><label>YES</label>
-						<input type="checkbox" {{#unless newBooksToBeEvaluated }} checked {{/unless}}><label>NO</label>
+						<input type="checkbox" {{#if courseCommitteeEvaluationForm.newBooksToBeEvaluated}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless courseCommitteeEvaluationForm.newBooksToBeEvaluated }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 
@@ -225,8 +225,8 @@ td
 						<li>Does the book map well onto the syllabus?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" {{#if bookMapWellToSyllabus}} checked {{/if}}><label>YES</label>
-						<input type="checkbox" {{#unless bookMapWellToSyllabus }} checked {{/unless}}><label>NO</label>
+						<input type="checkbox" {{#if courseCommitteeEvaluationForm.bookMapWellToSyllabus}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless courseCommitteeEvaluationForm.bookMapWellToSyllabus }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 				<br/>
@@ -235,8 +235,8 @@ td
 						<li>Do other assessments (performance/exit surveys,student feedback) indicate issues that need to be addressed?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" {{#if otherEvaluationsIndicateIssues}} checked {{/if}}><label>YES</label>
-						<input type="checkbox" {{#unless otherEvaluationsIndicateIssues }} checked {{/unless}}><label>NO</label>
+						<input type="checkbox" {{#if courseCommitteeEvaluationForm.otherEvaluationsIndicateIssues}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless courseCommitteeEvaluationForm.otherEvaluationsIndicateIssues }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 				<br/>
@@ -245,8 +245,8 @@ td
 						<li>Student Performance: Did students master the material?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" {{#if didStudentsMasterMaterial}} checked {{/if}}><label>YES</label>
-						<input type="checkbox" {{#unless didStudentsMasterMaterial }} checked {{/unless}}><label>NO</label>
+						<input type="checkbox" {{#if courseCommitteeEvaluationForm.didStudentsMasterMaterial}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless courseCommitteeEvaluationForm.didStudentsMasterMaterial }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 				<div class="section group">	
@@ -255,8 +255,8 @@ td
 					<li>Are there problems in the their knowledge of key concepts?</li>
 					</div>
 					<div class="col span_2_of_2">
-						<input type="checkbox" {{#if problemsWithKnowledgeInKeyConcepts}} checked {{/if}}><label>YES</label>
-						<input type="checkbox" {{#unless problemsWithKnowledgeInKeyConcepts }} checked {{/unless}}><label>NO</label>
+						<input type="checkbox" {{#if courseCommitteeEvaluationForm.problemsWithKnowledgeInKeyConcepts}} checked {{/if}}><label>YES</label>
+						<input type="checkbox" {{#unless courseCommitteeEvaluationForm.problemsWithKnowledgeInKeyConcepts }} checked {{/unless}}><label>NO</label>
 					</div>
 				</div>
 			</ul>
@@ -267,7 +267,7 @@ td
 		<div class="col span_1_of_1">
 			<h4>ACTIONS/RECOMMENDATIONS:</h4>
 	
-				<p> {{sectionIActionsRecommendations}}</p> 
+				<p> {{ courseCommitteeEvaluationForm.sectionIActionsRecommendations}}</p> 
 		</div>
 	</div>
 			
@@ -285,8 +285,8 @@ td
 					<li>Are the pre-requisites still appropriate for this course?</li>
 				</div>
 				<div class="col span_2_of_2">
-					<input type="checkbox" {{#if prereqsStillAppropriate}} checked {{/if}}><label>YES</label>
-					<input type="checkbox" {{#unless prereqsStillAppropriate}} checked {{/unless}}><label>NO</label>
+					<input type="checkbox" {{#if courseCommitteeEvaluationForm.prereqsStillAppropriate}} checked {{/if}}><label>YES</label>
+					<input type="checkbox" {{#unless courseCommitteeEvaluationForm.prereqsStillAppropriate}} checked {{/unless}}><label>NO</label>
 				</div>
 			</div>
 
@@ -295,8 +295,8 @@ td
 					<li>Does the course content satisfy the needs of follow-on courses?</li>
 				</div>
 				<div class="col span_2_of_2">
-					<input type="checkbox" {{#if satisfyNeedsOfFollowupCourses}} checked {{/if}}><label>YES</label>
-					<input type="checkbox" {{#unless satisfyNeedsOfFollowupCourses }} checked {{/unless}}><label>NO</label>
+					<input type="checkbox" {{#if courseCommitteeEvaluationForm.satisfyNeedsOfFollowupCourses}} checked {{/if}}><label>YES</label>
+					<input type="checkbox" {{#unless courseCommitteeEvaluationForm.satisfyNeedsOfFollowupCourses }} checked {{/unless}}><label>NO</label>
 				</div>
 			</div>		
 		</ul>
@@ -306,7 +306,7 @@ td
 	<div class="section group">			
 		<div class="col span_1_of_1">
 			<h4>ACTIONS/RECOMMENDATIONS:</h4>
-			<p> {{ sectionIIActionsRecommendations }}</p>
+			<p> {{ courseCommitteeEvaluationForm.sectionIIActionsRecommendations }}</p>
 		</div>
 	</div>
 
@@ -322,21 +322,21 @@ td
 	<div class="section group">	
 		<div class="col span_1_of_1">
 			<h3>Recommendations for course improvement:</h3>
-				<p> {{recommendationsForCourseImprovement }}</p>
+				<p> {{courseCommitteeEvaluationForm.recommendationsForCourseImprovement }}</p>
 				<br><br>
 		</div>
 	</div>
 	<div class="section group">	
 		<div class="col span_1_of_1">
 			<h3>Recommendations to CEN program governance (e.g. curriculum committee):</h3>
-				<p> {{ recommendationsToCENProgramGovernance }}</p>
+				<p> {{ courseCommitteeEvaluationForm.recommendationsToCENProgramGovernance }}</p>
 				<br><br>
 		</div>
 	</div>
 	<div class="section group">	
 		<div class="col span_1_of_1">
 			<h3>Comments/Recommendations on this process:</h3>
-				<p> {{sectionIIIRecommendationsComments}}</p>
+				<p> {{courseCommitteeEvaluationForm.sectionIIIRecommendationsComments}}</p>
 		</div>
 	</div>
 			<br/><br/><br/>
@@ -355,12 +355,12 @@ td
 	<div class="section group">	
 		
 			<ul>
-				<li>Course Number and Title: {{ courseOutcomeAssessmentForm.courseNumber }}, {{ courseOutcomeAssessmentForm.courseTitle }}</li>
-				<li>Term and Year: {{ courseOutcomeAssessmentForm.term }}</li>
-				<li>Instructor: {{ courseOutcomeAssessmentForm.instructor }}</li>
-				<li>Course Committee Participants: {{ courseCommitteeParticipants }}</li>
+				<li>Course Number and Title: {{  outcomes.[0].outcomeAssessmentForm.courseNumber }}, {{  outcomes.[0].outcomeAssessmentForm.courseTitle }}</li>
+				<li>Term and Year: {{ outcomes.[0].outcomeAssessmentForm.term }}</li>
+				<li>Instructor: {{ outcomes.[0].outcomeAssessmentForm.instructor }}</li>
+				<li>Course Committee Participants: {{ courseCommitteeEvaluationForm.courseCommitteeParticipants }}</li>
 				<br>
-				<li>Date: {{ date }}</li>
+				<li>Date: {{ courseCommitteeEvaluationForm.date }}</li>
 			</ul>
 		
 	</div>
