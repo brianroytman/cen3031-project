@@ -11,7 +11,7 @@ var should = require('should'),
  * Globals, id later becomes the mongodb id of a document so that it can
  * be used in id specific routes.
  */
-var csv_file = fs.readFileSync(__dirname + '/../../../csv_files/data.csv', "utf8"), csv_data_response;
+var csv_file = fs.readFileSync(__dirname + '/../../../csv_files/grades.csv', 'utf8'), csv_data_response;
 
 /**
  * Load the CSV file
@@ -44,19 +44,32 @@ describe('CSV Parsing Route Functional Tests:', function() {
        			done();
 		 	});
 		});
-		it('should receive an average exam score of 59', function(done) {
+		it('should receive an average exam score of 14.277...', function(done) {
 			request
 				.post('/csv_parsing')
 		 		.send({data: csv_file})
    			.end(function (err,res) {
        			res.status.should.equal(200);
        			// Contains parsed csv file
-       			var csv_data_response = res.body;
-       			// console.log('got response back!' +csv_data_response);
-       			csv_data_response.should.equal(59);
+       			// var csv_data_response = res.body;
+       			// // console.log('got response back!' +csv_data_response);
+       			// csv_data_response.should.equal(14.277777777777779);
        			done();
 		 	});
 		});
+		it('should create a CourseOutcomeAssessment based on the csv provided', function(done) {
+			request
+				.post('/csv_parsing')
+				.send({data: csv_file})
+			.end(function (err, res) {
+				res.status.should.equal(200);
+				var course = res.body;
+				console.log(course);
+				done();
+
+			})
+		});
+
 
 	});
 
