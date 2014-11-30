@@ -8,7 +8,6 @@
 
 var should = require('should'),
 	mongoose = require('mongoose'),
-	CourseModel= mongoose.model('CourseOutcomeAssessmentForm'),
 	CourseCommittee = mongoose.model('CourseCommitteeEvaluationForm');
 
 

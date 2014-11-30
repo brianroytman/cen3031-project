@@ -252,7 +252,11 @@ describe('PDFGenerator Route Functional Tests:', function() {
 
 	
 	after(function(done) {
+		CourseModel.remove().exec();
+		OutcomeEvaluation.remove().exec();
+		Outcome.remove().exec();
 		CourseCommittee.remove().exec();
+		Course.remove().exec();
 		done();
 	});
 

@@ -43,13 +43,14 @@ describe('CourseCommitteeEvaluationForm Route Functional Tests:', function() {
 			problemsWithKnowledgeInKeyConcepts: false,
 			prereqsStillAppropriate: true,
 			satisfyNeedsOfFollowupCourses: false,
-			sectionIActionsRecommendations: 'This is test for sectionI',
+			sectionIActionsRecommendations: 'Work Dammit',
 			sectionIIActionsRecommendations: 'This is test for sectionII',
 			recommendationsForCourseImprovement: 'Drop the course',
 			recommendationsToCENProgramGovernance: 'Give me a raise',
 			sectionIIIRecommendationsComments: 'This is test for section III',
 			courseOutcomeAssessmentForm: courseModel1,
 			});
+		
 			done();
 	});
 
